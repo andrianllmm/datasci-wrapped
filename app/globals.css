@@ -123,3 +123,8 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Hide native cursor */
+* {
+  cursor: none !important;
+}

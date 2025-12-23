@@ -9,13 +9,18 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@icons-pack/react-simple-icons": "^13.8.0",
     "@radix-ui/react-slot": "^1.2.4",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.562.0",
+    "motion": "^12.23.26",
     "next": "16.1.1",
     "react": "19.2.3",
     "react-dom": "19.2.3",
+    "react-intersection-observer": "^10.0.0",
+    "recharts": "2.15.4",
+    "simple-icons": "^16.2.0",
     "tailwind-merge": "^3.4.0"
   },
   "devDependencies": {

@@ -1,0 +1,112 @@
+"use client";
+
+import { useState } from "react";
+import { useInView } from "react-intersection-observer";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  Cell,
+} from "recharts";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import colors from "tailwindcss/colors";
+import { RoleEntry } from "@/data/types";
+
+const formatUSD = (value: number) => `$${value.toLocaleString("en-US")}`;
+
+export default function RolesChart({ data }: { data: RoleEntry[] }) {
+  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.3 });
+  const [animate, setAnimate] = useState(false);
+
+  if (inView && !animate) {
+    setAnimate(true);
+  }
+
+  return (
+    <Card
+      ref={ref}
+      className="w-full max-w-4xl mx-auto bg-transparent border-none shadow-none"
+    >
+      <CardHeader>
+        <CardTitle className="text-center text-white text-md md:text-lg">
+          Top 7 Data Science Roles
+        </CardTitle>
+      </CardHeader>
+
+      <CardContent>
+        <ResponsiveContainer width="100%" height={400}>
+          <BarChart
+            data={data}
+            layout="vertical"
+            margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
+          >
+            <CartesianGrid
+              strokeDasharray="3 3"
+              stroke="rgba(255,255,255,0.2)"
+            />
+            <XAxis
+              type="number"
+              tickFormatter={formatUSD}
+              tick={{ fill: "white", fontSize: 12 }}
+              axisLine={{ stroke: "white" }}
+              tickLine={{ stroke: "white" }}
+              label={{
+                value: "Salary (USD)",
+                position: "insideBottom",
+                offset: -10,
+                fill: "white",
+                fontSize: 12,
+              }}
+            />
+            <YAxis
+              type="category"
+              dataKey="role"
+              width={140}
+              interval={0}
+              tick={{
+                fill: "white",
+                fontSize: 12,
+                style: { whiteSpace: "nowrap" },
+              }}
+              axisLine={{ stroke: "white" }}
+              tickLine={{ stroke: "white" }}
+            />
+            <Tooltip
+              formatter={(value: number) => formatUSD(value)}
+              contentStyle={{
+                backgroundColor: "rgba(31, 41, 55, 0.85)",
+                border: "none",
+              }}
+              labelStyle={{ color: "white" }}
+              itemStyle={{ color: colors.purple[400] }}
+              cursor={{ fill: "rgba(255,255,255,0.1)" }}
+            />
+
+            <Bar
+              dataKey="salary"
+              radius={[0, 4, 4, 0]}
+              isAnimationActive={animate}
+              animationDuration={1500}
+            >
+              {data.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  className="hover-target"
+                  fill={
+                    entry.role === "Data Scientist"
+                      ? colors.purple[400]
+                      : colors.purple[600]
+                  }
+                />
+              ))}
+            </Bar>
+          </BarChart>
+        </ResponsiveContainer>
+      </CardContent>
+    </Card>
+  );
+}
