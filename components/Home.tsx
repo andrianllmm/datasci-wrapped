@@ -67,7 +67,7 @@ export default function Home() {
               className="mt-12 bg-purple-900 text-white hover:bg-purple-800 transition-transform duration-200 hover:-translate-y-1"
             >
               <a
-                href="https://github.com/andrianllmm/updssoc-bnc-internship"
+                href="https://github.com/andrianllmm/datasci-wrapped"
                 target="_blank"
                 rel="noreferrer"
               >

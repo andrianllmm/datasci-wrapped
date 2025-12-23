@@ -40,7 +40,7 @@ export default function OutroSlide({ data }: { data: WrappedData }) {
             className="bg-purple-900 text-white hover:bg-purple-800"
           >
             <a
-              href="https://github.com/andrianllmm/updssoc-bnc-internship"
+              href="https://github.com/andrianllmm/datasci-wrapped"
               target="_blank"
               rel="noreferrer"
             >
