@@ -8,6 +8,7 @@ import { SiGithub } from "@icons-pack/react-simple-icons";
 import { LucideArrowUpRight, MessageCircle, StarsIcon } from "lucide-react";
 import { motion } from "motion/react";
 import Link from "next/link";
+import { UpdssocLogo } from "./ui/updssoc-logo";
 
 const currentYear = new Date().getFullYear();
 const years = Object.keys(catalog)
@@ -30,11 +31,19 @@ export default function Home() {
 
           <motion.h1
             {...fadeInDown(0.1)}
-            className="text-center text-4xl md:text-6xl sm:text-5xl font-black text-foreground mb-12 flex justify-center items-end gap-2"
+            className="mb-12 flex justify-center items-center gap-2 w-full"
           >
-            DataSci{" "}
-            <span className="hover-target text-5xl md:text-7xl sm:text-6xl">
-              Wrapped
+            <motion.div
+              className="size-8 md:size-16 sm:size-12 w-fit"
+              initial={{ rotate: 300 }}
+              animate={{ rotate: 360 }}
+              transition={{ duration: 1, ease: "linear" }}
+            >
+              <UpdssocLogo className="size-8 md:size-16 sm:size-12 w-fit" />
+            </motion.div>
+
+            <span className="hover-target w-fit text-4xl md:text-7xl sm:text-6xl font-black">
+              DataSci Wrapped
             </span>
           </motion.h1>
 
@@ -42,10 +51,18 @@ export default function Home() {
             <Button
               asChild
               size="lg"
-              className="font-bold text-lg px-8 py-6 rounded-xl transition-all duration-200 hover:-translate-y-1 shadow-lg"
+              className="
+                group
+                font-semibold text-lg rounded-full transition-all duration-400 bg-primary/30
+                hover:-translate-y-1 shadow-xl
+                hover:shadow-[0_0_28px_rgba(255,165,0,0.2)]
+                focus:shadow-[0_0_32px_rgba(255,165,0,0.25)]
+                focus:outline-none
+              "
             >
               <Link href="/personal" className="flex gap-2 items-center">
-                <StarsIcon /> Unwrap Your Year in Data Science
+                <StarsIcon className="transition-transform duration-500 group-hover:rotate-180" />
+                Unwrap Your Year in Data Science
               </Link>
             </Button>
           </motion.div>
@@ -60,7 +77,7 @@ export default function Home() {
             {years.map((year, index) => {
               const isLatest = index === 0; // First year in the filtered list is the latest
               return (
-                <motion.div key={year} {...slideInLeft(index * 0.1 + 0.4)}>
+                <motion.div key={year} {...fadeInUp(index * 0.1 + 0.4)}>
                   <Button
                     variant="link"
                     asChild
@@ -85,7 +102,7 @@ export default function Home() {
 
           <motion.div
             {...fadeInUp(0.5)}
-            className="flex items-center justify-center gap-2"
+            className="flex flex-wrap items-center justify-center gap-1 md:gap-2"
           >
             <Button asChild variant="link">
               <Link href="/about">

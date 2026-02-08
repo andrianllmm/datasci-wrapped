@@ -1,8 +1,6 @@
 import Slide from "@/components/Slide";
 import { fadeInUp } from "@/lib/animations";
 import { ScrollAnimate } from "../ScrollAnimate";
-import { Button } from "../ui/button";
-import { SiGithub } from "@icons-pack/react-simple-icons";
 import { WrappedData } from "@/types/wrapped";
 import Link from "next/link";
 
@@ -19,33 +17,13 @@ export default function OutroSlide({ data }: { data: WrappedData }) {
           <ScrollAnimate animation={() => fadeInUp(0.2)}>
             <h2 className="text-4xl md:text-5xl font-bold text-primary mb-8">
               in{" "}
-              <Link
-                href={`/${data.year + 1}`}
-                className="text-foreground/90 hover:text-primary/90 underline"
-              >
+              <Link href={`/${data.year + 1}`} className="underline">
                 {data.year + 1}
               </Link>
               !
             </h2>
           </ScrollAnimate>
-          <ScrollAnimate animation={() => fadeInUp(0.4)}>
-            <p className="text-lg md:text-xl text-foreground/90">
-              by Andrian Lloyd Maagma from UP Data Science Society
-            </p>
-          </ScrollAnimate>
         </div>
-        <ScrollAnimate animation={() => fadeInUp(0.6)}>
-          <Button asChild={true} variant="secondary">
-            <a
-              href="https://github.com/andrianllmm/datasci-wrapped"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <SiGithub />
-              View Source Code
-            </a>
-          </Button>
-        </ScrollAnimate>
       </div>
     </Slide>
   );

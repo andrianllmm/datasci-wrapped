@@ -2,6 +2,7 @@ import Slide from "@/components/Slide";
 import { motion } from "motion/react";
 import { fadeInUp, bounceY, scrollDot, fadeInDown } from "@/lib/animations";
 import { WrappedData } from "@/types/wrapped";
+import { UpdssocLogo } from "../ui/updssoc-logo";
 
 export default function IntroSlide({ data }: { data: WrappedData }) {
   return (
@@ -11,8 +12,9 @@ export default function IntroSlide({ data }: { data: WrappedData }) {
         <div className="text-center">
           <motion.h1
             {...fadeInDown()}
-            className="text-6xl md:text-8xl font-black text-foreground mb-4"
+            className="text-3xl sm:text-4xl md:text-6xl font-black text-foreground flex items-center justify-center gap-1"
           >
+            <UpdssocLogo className="inline-block size-8 sm:size-12 md:size-16" />
             DataSci Wrapped
           </motion.h1>
           <motion.h2
