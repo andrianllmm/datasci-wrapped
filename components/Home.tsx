@@ -33,7 +33,15 @@ export default function Home() {
             {...fadeInDown(0.1)}
             className="mb-12 flex justify-center items-center gap-2 w-full"
           >
-            <UpdssocLogo className="size-8 md:size-16 sm:size-12 w-fit" />
+            <motion.div
+              className="size-8 md:size-16 sm:size-12 w-fit"
+              initial={{ rotate: 300 }}
+              animate={{ rotate: 360 }}
+              transition={{ duration: 1, ease: "linear" }}
+            >
+              <UpdssocLogo className="size-8 md:size-16 sm:size-12 w-fit" />
+            </motion.div>
+
             <span className="hover-target w-fit text-4xl md:text-7xl sm:text-6xl font-black">
               DataSci Wrapped
             </span>
@@ -69,7 +77,7 @@ export default function Home() {
             {years.map((year, index) => {
               const isLatest = index === 0; // First year in the filtered list is the latest
               return (
-                <motion.div key={year} {...slideInLeft(index * 0.1 + 0.4)}>
+                <motion.div key={year} {...fadeInUp(index * 0.1 + 0.4)}>
                   <Button
                     variant="link"
                     asChild

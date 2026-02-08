@@ -90,15 +90,19 @@ export default function UserProfileForm({
             </p>
           </div>
 
-          <motion.div {...slideInLeft(0.2)}>
+          <motion.div {...fadeInUp(0.2)}>
             <Button
               type="submit"
               disabled={
                 isLoading || (!githubUsername.trim() && !stackoverflowId.trim())
               }
-              className="flex items-center gap-1 w-full py-6 text-lg font-bold rounded-lg transition-all"
+              className="
+                group
+                flex bg-primary/40 items-center gap-2 w-full text-lg font-bold rounded-lg
+                transition-all
+              "
             >
-              <StarsIcon className="w-5 h-5" />
+              <StarsIcon className="w-5 h-5 transition-transform duration-500 group-hover:rotate-180" />
               {isLoading ? "Unwrapping Your Wrapped..." : "Unwrap My Wrapped"}
             </Button>
           </motion.div>
