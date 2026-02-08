@@ -23,13 +23,13 @@ export default function About() {
       icon: TrendingUp,
       title: "Industry Insights",
       description:
-        "Explore real-world data science trends with interactive visualizations powered by GitHub and Stack Overflow data.",
+        "Explore real-world data science trends with interactive visualizations",
     },
     {
       icon: Sparkles,
       title: "Personalized Wrapped",
       description:
-        "Connect your GitHub profile to generate a personalized summary of your data science journey and contributions.",
+        "Connect your GitHub and StackOverflow profiles to generate a personalized summary of your data science journey and contributions.",
     },
     {
       icon: Users,
@@ -42,6 +42,27 @@ export default function About() {
       title: "Interactive Charts",
       description:
         "Engaging visualizations that bring data to life, from programming languages to in-demand roles.",
+    },
+  ];
+
+  const howItWorks = [
+    {
+      step: "01",
+      title: "Explore Industry Data",
+      description:
+        "Start by viewing the latest data science trends. Browse through visualizations of popular programming languages, in-demand roles, market size trends, and more powered by real GitHub and Stack Overflow data.",
+    },
+    {
+      step: "02",
+      title: "Connect Your GitHub Profile",
+      description:
+        "Create a personalized wrapped by authenticating with GitHub. We analyze your public repositories, contributions, and coding patterns to generate insights about your data science journey.",
+    },
+    {
+      step: "03",
+      title: "Discover Your Wrapped",
+      description:
+        "Get your personalized DataSci Wrapped featuring your achievements, top languages, tools, and repositories. Share your summary with the community and celebrate your contributions!",
     },
   ];
 
@@ -71,9 +92,10 @@ export default function About() {
             {...fadeInDown(0.2)}
             className="text-lg md:text-xl text-muted-foreground mb-8"
           >
-            A data-driven web application inspired by Spotify Wrapped,
-            visualizing data science industry trends and celebrating your
-            personal contributions.
+            A data-driven web application inspired by{" "}
+            <span className="underline">Spotify Wrapped</span> to visualizing
+            data science industry trends and celebrating your personal
+            contributions.
           </motion.p>
 
           <motion.p
@@ -148,26 +170,7 @@ export default function About() {
           </motion.h2>
 
           <div className="space-y-6">
-            {[
-              {
-                step: "01",
-                title: "Explore Industry Data",
-                description:
-                  "Start by viewing the latest data science trends. Browse through visualizations of popular programming languages, in-demand roles, market size trends, and more powered by real GitHub and Stack Overflow data.",
-              },
-              {
-                step: "02",
-                title: "Connect Your GitHub Profile",
-                description:
-                  "Create a personalized wrapped by authenticating with GitHub. We analyze your public repositories, contributions, and coding patterns to generate insights about your data science journey.",
-              },
-              {
-                step: "03",
-                title: "Discover Your Wrapped",
-                description:
-                  "Get your personalized DataSci Wrapped featuring your achievements, top languages, tools, and repositories. Share your summary with the community and celebrate your contributions!",
-              },
-            ].map((item, index) => (
+            {howItWorks.map((item, index) => (
               <motion.div
                 key={index}
                 {...fadeInUp(index * 0.1)}
@@ -206,8 +209,8 @@ export default function About() {
             {...fadeInUp(0.2)}
             className="text-lg text-muted-foreground mb-8 leading-relaxed"
           >
-            DataSci Wrapped was developed by <b>Andrian Lloyd Maagma</b> as part
-            Associate&apos;s Internship / Work Immersion at the UP Data Science
+            DataSci Wrapped was developed by <b>Andrian Lloyd Maagma</b>
+            <br /> as part Associate&apos;s Internship at the UP Data Science
             Society (DSSoc).
           </motion.p>
 
