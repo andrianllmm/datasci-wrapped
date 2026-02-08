@@ -15,12 +15,14 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import colors from "tailwindcss/colors";
 import { RoleEntry } from "@/data/types";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 const formatUSD = (value: number) => `$${value.toLocaleString("en-US")}`;
 
 export default function RolesChart({ data }: { data: RoleEntry[] }) {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.3 });
   const [animate, setAnimate] = useState(false);
+  const isMobile = useIsMobile(640);
 
   if (inView && !animate) {
     setAnimate(true);
@@ -42,7 +44,12 @@ export default function RolesChart({ data }: { data: RoleEntry[] }) {
           <BarChart
             data={data}
             layout="vertical"
-            margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
+            margin={{
+              top: 20,
+              right: 30,
+              left: isMobile ? 10 : 20,
+              bottom: 20,
+            }}
           >
             <CartesianGrid
               strokeDasharray="3 3"
@@ -65,12 +72,12 @@ export default function RolesChart({ data }: { data: RoleEntry[] }) {
             <YAxis
               type="category"
               dataKey="role"
-              width={140}
+              width={isMobile ? 100 : 140}
               interval={0}
               tick={{
                 fill: "white",
-                fontSize: 12,
-                style: { whiteSpace: "nowrap" },
+                fontSize: isMobile ? 10 : 12,
+                style: { whiteSpace: isMobile ? "normal" : "nowrap" },
               }}
               axisLine={{ stroke: "white" }}
               tickLine={{ stroke: "white" }}

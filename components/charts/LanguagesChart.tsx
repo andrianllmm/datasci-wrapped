@@ -23,6 +23,7 @@ import {
   SiGo,
 } from "@icons-pack/react-simple-icons";
 import { LanguageEntry } from "@/data/types";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 const LanguageIcions = {
   python: <SiPython className="inline-block mr-2" size={24} color="white" />,
@@ -36,6 +37,7 @@ const LanguageIcions = {
 export default function LanguagesChart({ data }: { data: LanguageEntry[] }) {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.3 });
   const [animate, setAnimate] = useState(false);
+  const isMobile = useIsMobile(640);
 
   if (inView && !animate) setAnimate(true);
 
@@ -54,7 +56,12 @@ export default function LanguagesChart({ data }: { data: LanguageEntry[] }) {
           <BarChart
             layout="vertical"
             data={data}
-            margin={{ top: 20, right: 30, left: 100, bottom: 20 }}
+            margin={{
+              top: 20,
+              right: 30,
+              left: isMobile ? 24 : 100,
+              bottom: 20,
+            }}
           >
             <CartesianGrid
               strokeDasharray="3 3"
@@ -73,8 +80,10 @@ export default function LanguagesChart({ data }: { data: LanguageEntry[] }) {
               dataKey="language"
               axisLine={{ stroke: "white" }}
               tickLine={false}
-              width={160}
-              tick={CustomYAxisTick}
+              width={isMobile ? 40 : 160}
+              tick={(props) => (
+                <CustomYAxisTick {...props} isMobile={isMobile} />
+              )}
             />
             <Tooltip
               contentStyle={{
@@ -119,15 +128,17 @@ interface CustomTickProps {
   payload?: {
     value?: string | number;
   };
+  isMobile?: boolean;
 }
 
-const CustomYAxisTick = ({ x, y, payload }: CustomTickProps) => {
+const CustomYAxisTick = ({ x, y, payload, isMobile }: CustomTickProps) => {
   const language = String(payload?.value).toLowerCase();
   const icon = LanguageIcions[language as keyof typeof LanguageIcions];
+  const iconOffset = isMobile ? -24 : -40;
 
   return (
     <g transform={`translate(${x},${y})`}>
-      {icon && <g transform="translate(-40, -12)">{icon}</g>}
+      {icon && <g transform={`translate(${iconOffset}, -12)`}>{icon}</g>}
     </g>
   );
 };
