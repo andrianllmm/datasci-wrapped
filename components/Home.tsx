@@ -9,8 +9,12 @@ import { LucideArrowUpRight } from "lucide-react";
 import { motion } from "motion/react";
 import Link from "next/link";
 
-const years = Object.keys(catalog);
 const currentYear = new Date().getFullYear();
+const years = Object.keys(catalog)
+  .map(Number)
+  .filter((year) => year < currentYear && catalog[year] !== null)
+  .sort((a, b) => b - a) // Sort in descending order (latest first)
+  .map(String);
 
 export default function Home() {
   return (
@@ -36,7 +40,7 @@ export default function Home() {
 
           <div className="flex flex-col justify-between items-start mb-12">
             {years.map((year, index) => {
-              const isLatest = Number(year) === currentYear;
+              const isLatest = index === 0; // First year in the filtered list is the latest
               return (
                 <motion.div key={year} {...slideInLeft(index * 0.1 + 0.1)}>
                   <Button
