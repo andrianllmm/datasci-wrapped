@@ -43,10 +43,18 @@ export default function Home() {
             <Button
               asChild
               size="lg"
-              className="font-bold text-lg px-8 py-6 rounded-xl transition-all duration-200 hover:-translate-y-1 shadow-lg"
+              className="
+                group
+                font-semibold text-lg rounded-full transition-all duration-400 bg-primary/30
+                hover:-translate-y-1 shadow-xl
+                hover:shadow-[0_0_28px_rgba(255,165,0,0.2)]
+                focus:shadow-[0_0_32px_rgba(255,165,0,0.25)]
+                focus:outline-none
+              "
             >
               <Link href="/personal" className="flex gap-2 items-center">
-                <StarsIcon /> Unwrap Your Year in Data Science
+                <StarsIcon className="transition-transform duration-500 group-hover:rotate-180" />
+                Unwrap Your Year in Data Science
               </Link>
             </Button>
           </motion.div>
