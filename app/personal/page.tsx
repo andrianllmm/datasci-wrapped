@@ -67,6 +67,7 @@ export default function PersonalWrappedPage() {
     setError(null);
     localStorage.removeItem(STORAGE_KEY);
     setCachedProfile(null);
+    setIsEditing(false);
   };
 
   if (isLoading && !wrappedData) {
@@ -121,13 +122,22 @@ export default function PersonalWrappedPage() {
                 </motion.div>
               )}
 
-              <Button
-                variant="outline"
-                onClick={() => setIsEditing(false)}
-                className="w-full mt-4"
-              >
-                Cancel
-              </Button>
+              <div className="flex flex-col gap-2 mt-4">
+                <Button
+                  variant="outline"
+                  onClick={() => setIsEditing(false)}
+                  className="w-full"
+                >
+                  Cancel
+                </Button>
+                <Button
+                  variant="outline"
+                  onClick={handleReset}
+                  className="w-full border-red-400/50 text-red-400 hover:bg-red-500/10 hover:text-red-300 hover:border-red-400"
+                >
+                  Clear Details
+                </Button>
+              </div>
             </motion.div>
           </motion.div>
         )}
