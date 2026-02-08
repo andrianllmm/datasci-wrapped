@@ -102,7 +102,7 @@ export default function Home() {
 
           <motion.div
             {...fadeInUp(0.5)}
-            className="flex items-center justify-center gap-2"
+            className="flex flex-wrap items-center justify-center gap-1 md:gap-2"
           >
             <Button asChild variant="link">
               <Link href="/about">
