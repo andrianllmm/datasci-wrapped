@@ -122,6 +122,10 @@
   body {
     @apply bg-background text-foreground;
   }
+  ::selection {
+    background-color: oklch(78.801% 0.13941 52.981 / 0.5);
+    color: var(--color-white);
+  }
 }
 
 /* Hide native cursor */
