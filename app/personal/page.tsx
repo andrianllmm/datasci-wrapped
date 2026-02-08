@@ -91,6 +91,14 @@ export default function PersonalWrappedPage() {
     setError(null);
 
     try {
+      // If profile changed, clear old cache
+      if (cachedProfile) {
+        const oldCacheKey = generateCacheKey(cachedProfile);
+        if (oldCacheKey !== generateCacheKey(profile)) {
+          localStorage.removeItem(oldCacheKey);
+        }
+      }
+
       const data = await generatePersonalWrapped(profile);
       setWrappedData(data);
       setCachedProfile(profile);
@@ -118,9 +126,6 @@ export default function PersonalWrappedPage() {
   };
 
   const handleReset = () => {
-    setWrappedData(null);
-    setError(null);
-
     // Clear both profile and any cached wrapped data
     localStorage.removeItem(PROFILE_STORAGE_KEY);
     if (cachedProfile) {
@@ -128,6 +133,9 @@ export default function PersonalWrappedPage() {
       localStorage.removeItem(cacheKey);
     }
 
+    // Clear all state
+    setWrappedData(null);
+    setError(null);
     setCachedProfile(null);
     setIsEditing(false);
   };
