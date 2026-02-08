@@ -14,7 +14,47 @@ import { motion } from "motion/react";
 import { fadeInUp } from "@/lib/animations";
 import BackHomeButton from "@/components/BackHomeButton";
 
-const STORAGE_KEY = "datasci-wrapped-profile";
+const PROFILE_STORAGE_KEY = "datasci-wrapped-profile";
+const WRAPPED_DATA_STORAGE_KEY = "datasci-wrapped-data";
+const CACHE_TTL_MS = 24 * 60 * 60 * 1000; // 24 hours
+
+interface CachedWrappedData {
+  data: PersonalWrappedData;
+  timestamp: number;
+}
+
+/**
+ * Generate a cache key based on the user profile
+ * This ensures different users don't share cached data
+ */
+const generateCacheKey = (profile: UserProfileInput) => {
+  return `${WRAPPED_DATA_STORAGE_KEY}:${profile.githubUsername || ""}:${profile.stackoverflowId || ""}`;
+};
+
+/**
+ * Check if cached data has expired based on TTL
+ */
+const isCacheExpired = (cachedData: CachedWrappedData): boolean => {
+  return Date.now() - cachedData.timestamp > CACHE_TTL_MS;
+};
+
+/**
+ * Validate that cached data has the correct structure
+ */
+const isValidCachedData = (data: any): data is CachedWrappedData => {
+  return (
+    data &&
+    typeof data === "object" &&
+    data.data &&
+    typeof data.data === "object" &&
+    typeof data.timestamp === "number" &&
+    Array.isArray(data.data.repo) &&
+    Array.isArray(data.data.reputation) &&
+    Array.isArray(data.data.achievements) &&
+    Array.isArray(data.data.tools) &&
+    Array.isArray(data.data.languages)
+  );
+};
 
 export default function PersonalWrappedPage() {
   const [wrappedData, setWrappedData] = useState<PersonalWrappedData | null>(
@@ -28,12 +68,45 @@ export default function PersonalWrappedPage() {
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
-    const stored = localStorage.getItem(STORAGE_KEY);
+    const stored = localStorage.getItem(PROFILE_STORAGE_KEY);
     if (stored) {
       try {
         const profile = JSON.parse(stored);
         setCachedProfile(profile);
-        handleSubmit(profile);
+
+        // Try to load cached wrapped data first
+        const cacheKey = generateCacheKey(profile);
+        const cachedDataStr = localStorage.getItem(cacheKey);
+
+        if (cachedDataStr) {
+          try {
+            const cachedData = JSON.parse(cachedDataStr);
+
+            // Validate cached data structure
+            if (!isValidCachedData(cachedData)) {
+              console.warn("Invalid cached data structure, clearing cache");
+              localStorage.removeItem(cacheKey);
+              handleSubmit(profile);
+              return;
+            }
+
+            // Check if cache has expired
+            if (!isCacheExpired(cachedData)) {
+              setWrappedData(cachedData.data);
+            } else {
+              // Cache expired, fetch fresh data
+              handleSubmit(profile);
+            }
+          } catch (e) {
+            console.error("Failed to load cached wrapped data", e);
+            // If cache is corrupted, remove it and fetch fresh
+            localStorage.removeItem(cacheKey);
+            handleSubmit(profile);
+          }
+        } else {
+          // No cached data, fetch fresh
+          handleSubmit(profile);
+        }
       } catch (e) {
         console.error("Failed to load cached profile", e);
       }
@@ -45,10 +118,38 @@ export default function PersonalWrappedPage() {
     setError(null);
 
     try {
+      // If profile changed, clear old cache
+      if (cachedProfile) {
+        const oldCacheKey = generateCacheKey(cachedProfile);
+        const newCacheKey = generateCacheKey(profile);
+        if (oldCacheKey !== newCacheKey) {
+          localStorage.removeItem(oldCacheKey);
+        }
+      }
+
       const data = await generatePersonalWrapped(profile);
+
+      // Validate that we got proper data
+      if (
+        !data ||
+        !Array.isArray(data.repo) ||
+        !Array.isArray(data.reputation)
+      ) {
+        throw new Error("Received invalid data structure from API");
+      }
+
       setWrappedData(data);
       setCachedProfile(profile);
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(profile));
+
+      // Cache both the profile and wrapped data with timestamp
+      localStorage.setItem(PROFILE_STORAGE_KEY, JSON.stringify(profile));
+      const cacheKey = generateCacheKey(profile);
+      const cachedData: CachedWrappedData = {
+        data,
+        timestamp: Date.now(),
+      };
+      localStorage.setItem(cacheKey, JSON.stringify(cachedData));
+
       setIsEditing(false);
     } catch (err) {
       console.error("Error generating wrapped:", err);
@@ -63,9 +164,16 @@ export default function PersonalWrappedPage() {
   };
 
   const handleReset = () => {
+    // Clear both profile and any cached wrapped data
+    localStorage.removeItem(PROFILE_STORAGE_KEY);
+    if (cachedProfile) {
+      const cacheKey = generateCacheKey(cachedProfile);
+      localStorage.removeItem(cacheKey);
+    }
+
+    // Clear all state
     setWrappedData(null);
     setError(null);
-    localStorage.removeItem(STORAGE_KEY);
     setCachedProfile(null);
     setIsEditing(false);
   };
@@ -77,7 +185,17 @@ export default function PersonalWrappedPage() {
   if (wrappedData) {
     return (
       <>
-        <PersonalWrapped data={wrappedData} onEdit={() => setIsEditing(true)} />
+        <PersonalWrapped
+          data={wrappedData}
+          onEdit={() => {
+            // Clear cache when entering edit mode to force fresh data on resubmit
+            if (cachedProfile) {
+              const cacheKey = generateCacheKey(cachedProfile);
+              localStorage.removeItem(cacheKey);
+            }
+            setIsEditing(true);
+          }}
+        />
 
         {/* Edit Modal Overlay */}
         {isEditing && (
