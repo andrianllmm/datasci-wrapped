@@ -22,11 +22,11 @@ export default function PersonalIntroSlide({
     <Slide>
       <BackHomeButton />
 
-      {/* Edit Button - Fixed Position */}
+      {/* Edit Button - Absolute Position */}
       {onEdit && (
         <motion.div
           {...fadeInUp(0.1)}
-          className="fixed top-4 right-4 md:top-6 md:right-6 z-40"
+          className="absolute top-4 right-4 md:top-6 md:right-6 z-40"
         >
           <Button
             onClick={onEdit}

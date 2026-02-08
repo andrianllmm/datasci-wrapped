@@ -24,7 +24,7 @@ export default function PersonalWrapped({
       <PersonalReputationSlide data={data} />
       <PersonalToolsSlide data={data} />
       <PersonalLanguagesSlide data={data} />
-      <PersonalOutroSlide data={data} />
+      <PersonalOutroSlide data={data} onEdit={onEdit} />
     </div>
   );
 }
