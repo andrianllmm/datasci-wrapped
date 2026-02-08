@@ -3,7 +3,7 @@ import DataVolumeChart from "../charts/DataVolumeChart";
 import { fadeInUp } from "@/lib/animations";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import { ScrollAnimate } from "../ScrollAnimate";
-import { WrappedData } from "@/data/types";
+import { WrappedData } from "@/types/wrapped";
 
 export default function DataVolumeSlide({ data }: { data: WrappedData }) {
   return (

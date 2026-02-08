@@ -22,8 +22,25 @@ import {
   SiApachespark,
   SiDask,
   SiPolars,
+  SiReact,
+  SiDjango,
+  SiVuedotjs,
+  SiAngular,
+  SiFlask,
+  SiSpringboot,
+  SiNodedotjs,
+  SiExpress,
+  SiFastapi,
+  SiTensorflow,
+  SiPytorch,
+  SiScikitlearn,
+  SiApachekafka,
+  SiPostgresql,
+  SiMongodb,
+  SiDocker,
+  SiKubernetes,
 } from "@icons-pack/react-simple-icons";
-import { DataToolEntry } from "@/data/types";
+import { DataToolEntry } from "@/types/wrapped";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
 const ToolIcons = {
@@ -37,7 +54,47 @@ const ToolIcons = {
   ),
   polars: <SiPolars className="inline-block mr-2" size={24} color="white" />,
   dask: <SiDask className="inline-block mr-2" size={24} color="white" />,
-  "in-house": null,
+  react: <SiReact className="inline-block mr-2" size={24} color="white" />,
+  django: <SiDjango className="inline-block mr-2" size={24} color="white" />,
+  vue: <SiVuedotjs className="inline-block mr-2" size={24} color="white" />,
+  angular: <SiAngular className="inline-block mr-2" size={24} color="white" />,
+  flask: <SiFlask className="inline-block mr-2" size={24} color="white" />,
+  fastapi: <SiFastapi className="inline-block mr-2" size={24} color="white" />,
+  spring: (
+    <SiSpringboot className="inline-block mr-2" size={24} color="white" />
+  ),
+  "spring boot": (
+    <SiSpringboot className="inline-block mr-2" size={24} color="white" />
+  ),
+  node: <SiNodedotjs className="inline-block mr-2" size={24} color="white" />,
+  "node.js": (
+    <SiNodedotjs className="inline-block mr-2" size={24} color="white" />
+  ),
+  express: <SiExpress className="inline-block mr-2" size={24} color="white" />,
+  tensorflow: (
+    <SiTensorflow className="inline-block mr-2" size={24} color="white" />
+  ),
+  pytorch: <SiPytorch className="inline-block mr-2" size={24} color="white" />,
+  "scikit-learn": (
+    <SiScikitlearn className="inline-block mr-2" size={24} color="white" />
+  ),
+  scikit: (
+    <SiScikitlearn className="inline-block mr-2" size={24} color="white" />
+  ),
+  kafka: (
+    <SiApachekafka className="inline-block mr-2" size={24} color="white" />
+  ),
+  postgresql: (
+    <SiPostgresql className="inline-block mr-2" size={24} color="white" />
+  ),
+  postgres: (
+    <SiPostgresql className="inline-block mr-2" size={24} color="white" />
+  ),
+  mongodb: <SiMongodb className="inline-block mr-2" size={24} color="white" />,
+  docker: <SiDocker className="inline-block mr-2" size={24} color="white" />,
+  kubernetes: (
+    <SiKubernetes className="inline-block mr-2" size={24} color="white" />
+  ),
 };
 
 export default function ToolsChart({ data }: { data: DataToolEntry[] }) {
@@ -144,7 +201,21 @@ const CustomYAxisTick = ({ x, y, payload, isMobile }: CustomTickProps) => {
 
   return (
     <g transform={`translate(${x},${y})`}>
-      {icon && <g transform={`translate(${iconOffset}, -12)`}>{icon}</g>}
+      {icon ? (
+        <g transform={`translate(${iconOffset}, -12)`}>{icon}</g>
+      ) : (
+        // Fallback to text label
+        <text
+          x={iconOffset}
+          y={0}
+          textAnchor="end"
+          fill="white"
+          fontSize="12"
+          dy="0.3em"
+        >
+          {payload?.value}
+        </text>
+      )}
     </g>
   );
 };

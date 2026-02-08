@@ -2,7 +2,7 @@ import Slide from "@/components/Slide";
 import { fadeInUp } from "@/lib/animations";
 import { ScrollAnimate } from "../ScrollAnimate";
 import ToolsChart from "../charts/ToolsChart";
-import { WrappedData } from "@/data/types";
+import { WrappedData } from "@/types/wrapped";
 
 export default function ToolsSlide({ data }: { data: WrappedData }) {
   return (

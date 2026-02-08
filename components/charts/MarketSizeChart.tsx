@@ -14,7 +14,7 @@ import {
 } from "recharts";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import colors from "tailwindcss/colors";
-import { MarketSizeEntry } from "@/data/types";
+import { MarketSizeEntry } from "@/types/wrapped";
 
 export default function MarketSizeChart({ data }: { data: MarketSizeEntry[] }) {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.3 });

@@ -1,31 +1,48 @@
 import Slide from "@/components/Slide";
 import { motion } from "motion/react";
 import { fadeInUp, bounceY, scrollDot, fadeInDown } from "@/lib/animations";
-import { WrappedData } from "@/types/wrapped";
+import { PersonalWrappedData } from "@/types/wrapped";
 
-export default function IntroSlide({ data }: { data: WrappedData }) {
+export default function PersonalIntroSlide({
+  data,
+}: {
+  data: PersonalWrappedData;
+}) {
+  const userName =
+    data.userMetadata?.name || data.userMetadata?.username || "there";
+  const isNameAvailable =
+    data.userMetadata?.name || data.userMetadata?.username;
+
   return (
     <Slide>
       <div className="flex flex-col justify-between h-[80%] max-h-[80%] px-6 max-w-4xl mx-auto">
         {/* Intro Text */}
         <div className="text-center">
+          {isNameAvailable && (
+            <motion.p
+              {...fadeInDown()}
+              className="text-2xl md:text-3xl font-semibold text-purple-300 mb-4"
+            >
+              Hey there, {userName}!
+            </motion.p>
+          )}
           <motion.h1
-            {...fadeInDown()}
-            className="text-6xl md:text-8xl font-black text-white mb-4"
+            {...fadeInDown(isNameAvailable ? 0.1 : 0)}
+            className="text-5xl md:text-6xl font-black text-white mb-4"
           >
-            DataSci Wrapped
+            Your DataSci Wrapped
           </motion.h1>
           <motion.h2
-            {...fadeInUp(0.2)}
-            className="text-4xl md:text-6xl font-bold text-purple-200 mb-8"
+            {...fadeInUp(isNameAvailable ? 0.3 : 0.2)}
+            className="text-4xl md:text-5xl font-bold text-purple-100 mb-8"
           >
             {data.year}
           </motion.h2>
           <motion.p
-            {...fadeInUp(0.4)}
-            className="text-xl md:text-3xl text-purple-100"
+            {...fadeInUp(isNameAvailable ? 0.4 : 0.3)}
+            className="text-lg md:text-xl text-purple-100"
           >
-            Celebrating our collective achievements
+            Your personal data science journey
           </motion.p>
         </div>
 

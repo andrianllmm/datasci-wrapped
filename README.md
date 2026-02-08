@@ -1,10 +1,12 @@
 # DataSci Wrapped
 
-An application that presents data science trends and statistics in an interactive, year-by-year "wrapped" format.
+An application showing data science trends and statistics in a year-by-year "wrapped" format.
 
 ## About
 
-DataSci Wrapped visualizes key metrics and trends in the data science field, including:
+Visualizes data science metrics and trends in two modes:
+
+### Industry Wrapped
 
 - Global data volume growth
 - Data science platform market size
@@ -12,13 +14,26 @@ DataSci Wrapped visualizes key metrics and trends in the data science field, inc
 - Common data processing tools
 - Popular programming languages
 
+### Personal Wrapped
+
+Generate a personalized summary using public GitHub and StackOverflow APIs.
+
+Includes:
+
+- Programming language breakdown
+- Tools and technologies used
+- Project activity timeline
+- GitHub stats (repos, stars, followers)
+- StackOverflow reputation and badges
+
 ### Features
 
-- Year-based navigation for different data sets
+- Year-based navigation
+- Personal wrapped generation from public profiles
 - Responsive charts and visualizations
-- Animated transitions between slides
-- Scroll-based animations
-- Custom cursor implementation
+- Animated transitions and scroll-based animations
+- Custom cursor
+- Real-time data fetching from GitHub and StackOverflow APIs
 
 ## Development
 
@@ -38,15 +53,20 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000) to view the application.
 
-### Project Structure
+## Project Structure
 
-- `/app` - pages and layouts
-- `/components` - Reusable React components
-  - `/charts` - Data visualization components
-  - `/slides` - Individual slide components
-  - `/ui` - Base UI components
-- `/data` - Data catalog and type definitions
-- `/lib` - Utility functions
+```plaintext
+.
+├── app         # pages and layouts
+├── components  # React components
+│   ├── charts  # data visualizations
+│   ├── slides  # individual slides
+│   ├── ui      # base UI components
+├── data        # data catalog and type definitions
+└── lib         # utilities
+    └── api     # GitHub, StackOverflow, and data transformation services
+
+```
 
 ## Contributing
 

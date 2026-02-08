@@ -14,12 +14,23 @@ import {
 } from "recharts";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import colors from "tailwindcss/colors";
-import { RoleEntry } from "@/types/wrapped";
+import { AchievementEntry } from "@/types/wrapped";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
-const formatUSD = (value: number) => `$${value.toLocaleString("en-US")}`;
+const colorPalette = [
+  colors.purple[300],
+  colors.purple[400],
+  colors.purple[500],
+  colors.purple[600],
+];
 
-export default function RolesChart({ data }: { data: RoleEntry[] }) {
+const formatNumber = (value: number) => value.toLocaleString("en-US");
+
+export default function AchievementsChart({
+  data,
+}: {
+  data: AchievementEntry[];
+}) {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.3 });
   const [animate, setAnimate] = useState(false);
   const isMobile = useIsMobile(640);
@@ -35,7 +46,7 @@ export default function RolesChart({ data }: { data: RoleEntry[] }) {
     >
       <CardHeader>
         <CardTitle className="text-center text-white text-md md:text-lg">
-          Top 7 Data Science Roles
+          Your Personal Achievements
         </CardTitle>
       </CardHeader>
 
@@ -53,37 +64,29 @@ export default function RolesChart({ data }: { data: RoleEntry[] }) {
           >
             <CartesianGrid
               strokeDasharray="3 3"
-              stroke="rgba(255,255,255,0.2)"
+              stroke="rgba(255,255,255,0.1)"
+              vertical={false}
             />
             <XAxis
               type="number"
-              tickFormatter={formatUSD}
               tick={{ fill: "white", fontSize: 12 }}
               axisLine={{ stroke: "white" }}
               tickLine={{ stroke: "white" }}
-              label={{
-                value: "Salary (USD)",
-                position: "insideBottom",
-                offset: -10,
-                fill: "white",
-                fontSize: 12,
-              }}
             />
             <YAxis
+              dataKey="label"
               type="category"
-              dataKey="role"
-              width={isMobile ? 100 : 140}
-              interval={0}
               tick={{
                 fill: "white",
                 fontSize: isMobile ? 10 : 12,
-                style: { whiteSpace: isMobile ? "normal" : "nowrap" },
               }}
               axisLine={{ stroke: "white" }}
               tickLine={{ stroke: "white" }}
+              width={isMobile ? 100 : 140}
+              interval={0}
             />
             <Tooltip
-              formatter={(value: number) => formatUSD(value)}
+              formatter={(value: number) => formatNumber(value)}
               contentStyle={{
                 backgroundColor: "rgba(31, 41, 55, 0.85)",
                 border: "none",
@@ -92,9 +95,8 @@ export default function RolesChart({ data }: { data: RoleEntry[] }) {
               itemStyle={{ color: colors.purple[400] }}
               cursor={{ fill: "rgba(255,255,255,0.1)" }}
             />
-
             <Bar
-              dataKey="salary"
+              dataKey="value"
               radius={[0, 4, 4, 0]}
               isAnimationActive={animate}
               animationDuration={1500}
@@ -102,12 +104,7 @@ export default function RolesChart({ data }: { data: RoleEntry[] }) {
               {data.map((entry, index) => (
                 <Cell
                   key={`cell-${index}`}
-                  className="hover-target"
-                  fill={
-                    entry.role === "Data Scientist"
-                      ? colors.purple[400]
-                      : colors.purple[600]
-                  }
+                  fill={colorPalette[index % colorPalette.length]}
                 />
               ))}
             </Bar>
