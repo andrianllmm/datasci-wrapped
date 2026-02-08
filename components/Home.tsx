@@ -85,8 +85,18 @@ export default function Home() {
 
           <motion.div
             {...fadeInUp(0.5)}
-            className="flex items-center justify-center gap-3"
+            className="flex items-center justify-center gap-2"
           >
+            <Button asChild variant="link">
+              <Link href="/about">
+                <span className="text-base">About</span>
+              </Link>
+            </Button>
+            <Button asChild variant="link">
+              <Link href="/faq">
+                <span className="text-base">FAQ</span>
+              </Link>
+            </Button>
             <Button asChild variant="link">
               <a
                 href="https://github.com/andrianllmm/datasci-wrapped"
@@ -95,18 +105,8 @@ export default function Home() {
                 className="flex items-center gap-2"
               >
                 <SiGithub />
-                Source Code
+                <span className="text-base">Source Code</span>
               </a>
-            </Button>
-            <Button asChild variant="link">
-              <Link href="/about">
-                <span>About</span>
-              </Link>
-            </Button>
-            <Button asChild variant="link">
-              <Link href="/faq">
-                <span>FAQ</span>
-              </Link>
             </Button>
           </motion.div>
         </div>
