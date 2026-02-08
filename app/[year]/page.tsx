@@ -15,7 +15,7 @@ export default async function Page({ params }: PageProps) {
     return (
       <Slide>
         <div className="flex flex-col justify-between items-center x-6 max-w-4xl mx-auto gap-4">
-          <h1 className="text-center text-3xl md:text-5xl sm:text-4xl font-black text-white mb-4 flex gap-3">
+          <h1 className="text-center text-3xl md:text-5xl sm:text-4xl font-black text-foreground mb-4 flex gap-3">
             {year} is coming soon...
           </h1>
         </div>
@@ -27,7 +27,7 @@ export default async function Page({ params }: PageProps) {
     return (
       <Slide>
         <div className="flex flex-col justify-between items-center x-6 max-w-4xl mx-auto gap-4">
-          <h1 className="text-center text-3xl md:text-5xl sm:text-4xl font-black text-white mb-4 flex gap-3">
+          <h1 className="text-center text-3xl md:text-5xl sm:text-4xl font-black text-foreground mb-4 flex gap-3">
             Opss... We might have missed {year}...
           </h1>
         </div>

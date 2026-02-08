@@ -11,7 +11,7 @@ import { WrappedData } from "@/types/wrapped";
 
 export default function Wrapped({ data }: { data: WrappedData }) {
   return (
-    <div className="snap-y snap-mandatory h-screen w-screen overflow-y-scroll bg-purple-700">
+    <div className="snap-y snap-mandatory h-screen w-screen overflow-y-scroll bg-background">
       <IntroSlide data={data} />
       <DataVolumeSlide data={data} />
       <MarketSizeSlide data={data} />

@@ -13,13 +13,12 @@ import {
   Cell,
 } from "recharts";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import colors from "tailwindcss/colors";
 import { RepoEntry } from "@/types/wrapped";
 
 const activityColorPalette = [
-  colors.purple[400],
-  colors.purple[500],
-  colors.purple[600],
+  "var(--color-chart-2)",
+  "var(--color-chart-3)",
+  "var(--color-chart-4)",
 ];
 
 const formatMonth = (month: string) => {
@@ -42,7 +41,7 @@ export default function RepoChart({ data }: { data: RepoEntry[] }) {
       className="w-full max-w-4xl mx-auto bg-transparent border-none shadow-none"
     >
       <CardHeader>
-        <CardTitle className="text-center text-white text-md md:text-lg">
+        <CardTitle className="text-center text-foreground text-md md:text-lg">
           Your Repository Creation Timeline
         </CardTitle>
       </CardHeader>
@@ -52,15 +51,12 @@ export default function RepoChart({ data }: { data: RepoEntry[] }) {
             data={data}
             margin={{ top: 20, right: 30, left: 0, bottom: 20 }}
           >
-            <CartesianGrid
-              strokeDasharray="3 3"
-              stroke="rgba(255,255,255,0.2)"
-            />
+            <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
             <XAxis
               dataKey="month"
-              tick={{ fill: "white", fontSize: 11 }}
-              axisLine={{ stroke: "white" }}
-              tickLine={{ stroke: "white" }}
+              tick={{ fill: "var(--color-foreground)", fontSize: 11 }}
+              axisLine={{ stroke: "var(--color-foreground)" }}
+              tickLine={{ stroke: "var(--color-foreground)" }}
               angle={-45}
               textAnchor="end"
               height={80}
@@ -68,30 +64,31 @@ export default function RepoChart({ data }: { data: RepoEntry[] }) {
               interval="preserveStartEnd"
             />
             <YAxis
-              tick={{ fill: "white" }}
-              axisLine={{ stroke: "white" }}
-              tickLine={{ stroke: "white" }}
+              tick={{ fill: "var(--color-foreground)" }}
+              axisLine={{ stroke: "var(--color-foreground)" }}
+              tickLine={{ stroke: "var(--color-foreground)" }}
               label={{
                 value: "Repositories",
                 angle: -90,
                 position: "insideLeft",
-                fill: "white",
+                fill: "var(--color-foreground)",
               }}
             />
             <Tooltip
               formatter={(value) => `${value} repos`}
               contentStyle={{
-                backgroundColor: "rgba(31, 41, 55, 0.85)",
+                backgroundColor:
+                  "color-mix(in srgb, var(--color-secondary) 85%, transparent)",
                 border: "none",
               }}
-              labelStyle={{ color: "white" }}
-              itemStyle={{ color: colors.purple[400] }}
-              cursor={{ fill: "rgba(255,255,255,0.1)" }}
+              labelStyle={{ color: "var(--color-foreground)" }}
+              itemStyle={{ color: "var(--color-chart-2)" }}
+              cursor={{ fill: "var(--color-border)" }}
             />
             {animate && (
               <Bar
                 dataKey="count"
-                fill={colors.purple[400]}
+                fill="var(--color-chart-2)"
                 isAnimationActive={true}
                 animationDuration={800}
               >

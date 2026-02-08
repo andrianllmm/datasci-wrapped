@@ -13,7 +13,6 @@ import {
   Cell,
 } from "recharts";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import colors from "tailwindcss/colors";
 import { DataVolumeEntry } from "@/types/wrapped";
 
 export default function DataVolumeChart({ data }: { data: DataVolumeEntry[] }) {
@@ -30,7 +29,7 @@ export default function DataVolumeChart({ data }: { data: DataVolumeEntry[] }) {
       className="w-full max-w-4xl mx-auto bg-transparent border-none shadow-none"
     >
       <CardHeader>
-        <CardTitle className="text-center text-white text-md md:text-lg">
+        <CardTitle className="text-center text-foreground text-md md:text-lg">
           Volume of Data Created, Captured, Copied And Consumed Worldwide
         </CardTitle>
       </CardHeader>
@@ -40,35 +39,33 @@ export default function DataVolumeChart({ data }: { data: DataVolumeEntry[] }) {
             data={data}
             margin={{ top: 20, right: 30, left: 0, bottom: 20 }}
           >
-            <CartesianGrid
-              strokeDasharray="3 3"
-              stroke="rgba(255,255,255,0.2)"
-            />
+            <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
             <XAxis
               dataKey="year"
-              tick={{ fill: "white" }}
-              axisLine={{ stroke: "white" }}
-              tickLine={{ stroke: "white" }}
+              tick={{ fill: "var(--color-foreground)" }}
+              axisLine={{ stroke: "var(--color-foreground)" }}
+              tickLine={{ stroke: "var(--color-foreground)" }}
             />
             <YAxis
-              tick={{ fill: "white" }}
-              axisLine={{ stroke: "white" }}
-              tickLine={{ stroke: "white" }}
+              tick={{ fill: "var(--color-foreground)" }}
+              axisLine={{ stroke: "var(--color-foreground)" }}
+              tickLine={{ stroke: "var(--color-foreground)" }}
               label={{
                 value: "(in zettabytes)",
                 angle: -90,
                 position: "insideLeft",
-                fill: "white",
+                fill: "var(--color-foreground)",
               }}
             />
             <Tooltip
               contentStyle={{
-                backgroundColor: "rgba(31, 41, 55, 0.8)",
+                backgroundColor:
+                  "color-mix(in srgb, var(--color-secondary) 85%, transparent)",
                 border: "none",
               }}
-              labelStyle={{ color: "white" }}
-              itemStyle={{ color: "#A78BFA" }}
-              cursor={{ fill: "rgba(255, 255, 255, 0.1)" }}
+              labelStyle={{ color: "var(--color-foreground)" }}
+              itemStyle={{ color: "var(--color-chart-2)" }}
+              cursor={{ fill: "var(--color-border)" }}
             />
             <Bar
               dataKey="zettabytes"
@@ -82,8 +79,8 @@ export default function DataVolumeChart({ data }: { data: DataVolumeEntry[] }) {
                   className="hover-target"
                   fill={
                     entry.year === new Date().getFullYear()
-                      ? colors.purple[400]
-                      : colors.purple[600]
+                      ? "var(--color-chart-2)"
+                      : "var(--color-chart-4)"
                   }
                 />
               ))}

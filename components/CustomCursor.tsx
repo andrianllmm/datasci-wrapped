@@ -104,7 +104,7 @@ export default function CustomCursor() {
           opacity: hovering ? 0.25 : 0.15,
         }}
         transition={{ type: "spring", stiffness: 300, damping: 25 }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-10 w-10 rounded-full border border-orange-300/90 bg-orange-300/70 shadow-lg"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-10 w-10 rounded-full border border-accent/90 bg-accent/70 shadow-lg"
       />
 
       {/* Inner dot */}
@@ -113,7 +113,7 @@ export default function CustomCursor() {
           translateX: dotX,
           translateY: dotY,
         }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-4 w-4 rounded-full bg-orange-400/50 shadow-md"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-4 w-4 rounded-full bg-accent/50 shadow-md"
       />
     </motion.div>
   );

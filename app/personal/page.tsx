@@ -76,13 +76,13 @@ export default function PersonalWrappedPage() {
   }
 
   return (
-    <div className="min-h-screen w-screen bg-purple-700">
+    <div className="min-h-screen w-screen bg-background">
       <Slide>
         <div className="flex flex-col justify-center items-center max-w-4xl mx-auto">
           <motion.div {...fadeInUp()} className="mb-8">
             <Link
               href="/"
-              className="flex items-center gap-1 text-purple-200 hover:text-white transition-colors"
+              className="flex items-center gap-1 text-primary hover:text-foreground transition-colors"
             >
               <ArrowLeft className="w-4 h-4" />
               Back to Home
@@ -91,7 +91,7 @@ export default function PersonalWrappedPage() {
 
           <motion.h2
             {...fadeInUp()}
-            className="max-w-md px-6 mx-auto text-2xl md:text-3xl font-bold text-white text-center mb-8"
+            className="max-w-md px-6 mx-auto text-2xl md:text-3xl font-bold text-foreground text-center mb-8"
           >
             Unwrap Your
             <br />

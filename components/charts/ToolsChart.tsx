@@ -14,7 +14,6 @@ import {
   LabelList,
 } from "recharts";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import colors from "tailwindcss/colors";
 import {
   SiPandas,
   SiNumpy,
@@ -43,57 +42,83 @@ import {
 import { DataToolEntry } from "@/types/wrapped";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
+const iconColor = "var(--color-foreground)";
+
 const ToolIcons = {
-  pandas: <SiPandas className="inline-block mr-2" size={24} color="white" />,
-  numpy: <SiNumpy className="inline-block mr-2" size={24} color="white" />,
+  pandas: (
+    <SiPandas className="inline-block mr-2" size={24} color={iconColor} />
+  ),
+  numpy: <SiNumpy className="inline-block mr-2" size={24} color={iconColor} />,
   spark: (
-    <SiApachespark className="inline-block mr-2" size={24} color="white" />
+    <SiApachespark className="inline-block mr-2" size={24} color={iconColor} />
   ),
   airflow: (
-    <SiApacheairflow className="inline-block mr-2" size={24} color="white" />
+    <SiApacheairflow
+      className="inline-block mr-2"
+      size={24}
+      color={iconColor}
+    />
   ),
-  polars: <SiPolars className="inline-block mr-2" size={24} color="white" />,
-  dask: <SiDask className="inline-block mr-2" size={24} color="white" />,
-  react: <SiReact className="inline-block mr-2" size={24} color="white" />,
-  django: <SiDjango className="inline-block mr-2" size={24} color="white" />,
-  vue: <SiVuedotjs className="inline-block mr-2" size={24} color="white" />,
-  angular: <SiAngular className="inline-block mr-2" size={24} color="white" />,
-  flask: <SiFlask className="inline-block mr-2" size={24} color="white" />,
-  fastapi: <SiFastapi className="inline-block mr-2" size={24} color="white" />,
+  polars: (
+    <SiPolars className="inline-block mr-2" size={24} color={iconColor} />
+  ),
+  dask: <SiDask className="inline-block mr-2" size={24} color={iconColor} />,
+  react: <SiReact className="inline-block mr-2" size={24} color={iconColor} />,
+  django: (
+    <SiDjango className="inline-block mr-2" size={24} color={iconColor} />
+  ),
+  vue: <SiVuedotjs className="inline-block mr-2" size={24} color={iconColor} />,
+  angular: (
+    <SiAngular className="inline-block mr-2" size={24} color={iconColor} />
+  ),
+  flask: <SiFlask className="inline-block mr-2" size={24} color={iconColor} />,
+  fastapi: (
+    <SiFastapi className="inline-block mr-2" size={24} color={iconColor} />
+  ),
   spring: (
-    <SiSpringboot className="inline-block mr-2" size={24} color="white" />
+    <SiSpringboot className="inline-block mr-2" size={24} color={iconColor} />
   ),
   "spring boot": (
-    <SiSpringboot className="inline-block mr-2" size={24} color="white" />
+    <SiSpringboot className="inline-block mr-2" size={24} color={iconColor} />
   ),
-  node: <SiNodedotjs className="inline-block mr-2" size={24} color="white" />,
+  node: (
+    <SiNodedotjs className="inline-block mr-2" size={24} color={iconColor} />
+  ),
   "node.js": (
-    <SiNodedotjs className="inline-block mr-2" size={24} color="white" />
+    <SiNodedotjs className="inline-block mr-2" size={24} color={iconColor} />
   ),
-  express: <SiExpress className="inline-block mr-2" size={24} color="white" />,
+  express: (
+    <SiExpress className="inline-block mr-2" size={24} color={iconColor} />
+  ),
   tensorflow: (
-    <SiTensorflow className="inline-block mr-2" size={24} color="white" />
+    <SiTensorflow className="inline-block mr-2" size={24} color={iconColor} />
   ),
-  pytorch: <SiPytorch className="inline-block mr-2" size={24} color="white" />,
+  pytorch: (
+    <SiPytorch className="inline-block mr-2" size={24} color={iconColor} />
+  ),
   "scikit-learn": (
-    <SiScikitlearn className="inline-block mr-2" size={24} color="white" />
+    <SiScikitlearn className="inline-block mr-2" size={24} color={iconColor} />
   ),
   scikit: (
-    <SiScikitlearn className="inline-block mr-2" size={24} color="white" />
+    <SiScikitlearn className="inline-block mr-2" size={24} color={iconColor} />
   ),
   kafka: (
-    <SiApachekafka className="inline-block mr-2" size={24} color="white" />
+    <SiApachekafka className="inline-block mr-2" size={24} color={iconColor} />
   ),
   postgresql: (
-    <SiPostgresql className="inline-block mr-2" size={24} color="white" />
+    <SiPostgresql className="inline-block mr-2" size={24} color={iconColor} />
   ),
   postgres: (
-    <SiPostgresql className="inline-block mr-2" size={24} color="white" />
+    <SiPostgresql className="inline-block mr-2" size={24} color={iconColor} />
   ),
-  mongodb: <SiMongodb className="inline-block mr-2" size={24} color="white" />,
-  docker: <SiDocker className="inline-block mr-2" size={24} color="white" />,
+  mongodb: (
+    <SiMongodb className="inline-block mr-2" size={24} color={iconColor} />
+  ),
+  docker: (
+    <SiDocker className="inline-block mr-2" size={24} color={iconColor} />
+  ),
   kubernetes: (
-    <SiKubernetes className="inline-block mr-2" size={24} color="white" />
+    <SiKubernetes className="inline-block mr-2" size={24} color={iconColor} />
   ),
 };
 
@@ -110,7 +135,7 @@ export default function ToolsChart({ data }: { data: DataToolEntry[] }) {
       className="w-full max-w-4xl mx-auto bg-transparent border-none shadow-none"
     >
       <CardHeader>
-        <CardTitle className="text-center text-white text-md md:text-lg">
+        <CardTitle className="text-center text-foreground text-md md:text-lg">
           Tools For Data Exploration And Processing
         </CardTitle>
       </CardHeader>
@@ -126,22 +151,19 @@ export default function ToolsChart({ data }: { data: DataToolEntry[] }) {
               bottom: 20,
             }}
           >
-            <CartesianGrid
-              strokeDasharray="3 3"
-              stroke="rgba(255,255,255,0.2)"
-            />
+            <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
             <XAxis
               type="number"
-              tick={{ fill: "white" }}
-              axisLine={{ stroke: "white" }}
-              tickLine={{ stroke: "white" }}
+              tick={{ fill: "var(--color-foreground)" }}
+              axisLine={{ stroke: "var(--color-foreground)" }}
+              tickLine={{ stroke: "var(--color-foreground)" }}
               domain={[0, 100]}
               tickFormatter={(value) => `${value}%`}
             />
             <YAxis
               type="category"
               dataKey="tool"
-              axisLine={{ stroke: "white" }}
+              axisLine={{ stroke: "var(--color-foreground)" }}
               tickLine={false}
               width={isMobile ? 40 : 160}
               tick={(props) => (
@@ -150,12 +172,13 @@ export default function ToolsChart({ data }: { data: DataToolEntry[] }) {
             />
             <Tooltip
               contentStyle={{
-                backgroundColor: "rgba(31, 41, 55, 0.8)",
+                backgroundColor:
+                  "color-mix(in srgb, var(--color-secondary) 85%, transparent)",
                 border: "none",
               }}
-              labelStyle={{ color: "white" }}
-              itemStyle={{ color: colors.purple[400] }}
-              cursor={{ fill: "rgba(255, 255, 255, 0.1)" }}
+              labelStyle={{ color: "var(--color-foreground)" }}
+              itemStyle={{ color: "var(--color-chart-2)" }}
+              cursor={{ fill: "var(--color-border)" }}
               formatter={(value: number) => `${value.toLocaleString()}%`}
             />
             <Bar
@@ -168,13 +191,15 @@ export default function ToolsChart({ data }: { data: DataToolEntry[] }) {
                 <Cell
                   key={`cell-${index}`}
                   className="hover-target"
-                  fill={index < 2 ? colors.purple[400] : colors.purple[600]}
+                  fill={
+                    index < 2 ? "var(--color-chart-2)" : "var(--color-chart-4)"
+                  }
                 />
               ))}
               <LabelList
                 dataKey="value"
                 position="right"
-                fill="white"
+                fill="var(--color-foreground)"
                 formatter={(val: number) => `${val}%`}
               />
             </Bar>
@@ -209,7 +234,7 @@ const CustomYAxisTick = ({ x, y, payload, isMobile }: CustomTickProps) => {
           x={iconOffset}
           y={0}
           textAnchor="end"
-          fill="white"
+          fill="var(--color-foreground)"
           fontSize="12"
           dy="0.3em"
         >

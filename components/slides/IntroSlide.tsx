@@ -11,19 +11,19 @@ export default function IntroSlide({ data }: { data: WrappedData }) {
         <div className="text-center">
           <motion.h1
             {...fadeInDown()}
-            className="text-6xl md:text-8xl font-black text-white mb-4"
+            className="text-6xl md:text-8xl font-black text-foreground mb-4"
           >
             DataSci Wrapped
           </motion.h1>
           <motion.h2
             {...fadeInUp(0.2)}
-            className="text-4xl md:text-6xl font-bold text-purple-200 mb-8"
+            className="text-4xl md:text-6xl font-bold text-primary mb-8"
           >
             {data.year}
           </motion.h2>
           <motion.p
             {...fadeInUp(0.4)}
-            className="text-xl md:text-3xl text-purple-100"
+            className="text-xl md:text-3xl text-foreground/90"
           >
             Celebrating our collective achievements
           </motion.p>
@@ -31,11 +31,13 @@ export default function IntroSlide({ data }: { data: WrappedData }) {
 
         {/* Scroll Indicator */}
         <motion.div className="flex flex-col items-center" {...bounceY(8)}>
-          <div className="text-purple-400 text-sm mb-2">Scroll to explore</div>
-          <div className="w-6 h-10 border-2 border-purple-400 rounded-full relative overflow-hidden flex items-start justify-center">
+          <div className="text-muted-foreground text-sm mb-2">
+            Scroll to explore
+          </div>
+          <div className="w-6 h-10 border-2 border-primary/70 rounded-full relative overflow-hidden flex items-start justify-center">
             <motion.div
               {...scrollDot(4, 12)}
-              className="w-1 h-2 bg-purple-400 rounded-full"
+              className="w-1 h-2 bg-primary/70 rounded-full"
             />
           </div>
         </motion.div>

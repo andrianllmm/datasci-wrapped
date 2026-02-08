@@ -14,7 +14,6 @@ import {
   LabelList,
 } from "recharts";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import colors from "tailwindcss/colors";
 import {
   SiPython,
   SiSqlite,
@@ -37,30 +36,40 @@ import {
 import { LanguageEntry } from "@/types/wrapped";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
+const iconColor = "var(--color-foreground)";
+
 const LanguageIcons = {
-  python: <SiPython className="inline-block mr-2" size={24} color="white" />,
-  sql: <SiSqlite className="inline-block mr-2" size={24} color="white" />,
-  r: <SiR className="inline-block mr-2" size={24} color="white" />,
-  scala: <SiScala className="inline-block mr-2" size={24} color="white" />,
-  go: <SiGo className="inline-block mr-2" size={24} color="white" />,
+  python: (
+    <SiPython className="inline-block mr-2" size={24} color={iconColor} />
+  ),
+  sql: <SiSqlite className="inline-block mr-2" size={24} color={iconColor} />,
+  r: <SiR className="inline-block mr-2" size={24} color={iconColor} />,
+  scala: <SiScala className="inline-block mr-2" size={24} color={iconColor} />,
+  go: <SiGo className="inline-block mr-2" size={24} color={iconColor} />,
   javascript: (
-    <SiJavascript className="inline-block mr-2" size={24} color="white" />
+    <SiJavascript className="inline-block mr-2" size={24} color={iconColor} />
   ),
   typescript: (
-    <SiTypescript className="inline-block mr-2" size={24} color="white" />
+    <SiTypescript className="inline-block mr-2" size={24} color={iconColor} />
   ),
-  "c++": <SiCplusplus className="inline-block mr-2" size={24} color="white" />,
-  swift: <SiSwift className="inline-block mr-2" size={24} color="white" />,
-  kotlin: <SiKotlin className="inline-block mr-2" size={24} color="white" />,
-  php: <SiPhp className="inline-block mr-2" size={24} color="white" />,
-  ruby: <SiRuby className="inline-block mr-2" size={24} color="white" />,
-  rust: <SiRust className="inline-block mr-2" size={24} color="white" />,
-  julia: <SiJulia className="inline-block mr-2" size={24} color="white" />,
-  html: <SiHtml5 className="inline-block mr-2" size={24} color="white" />,
-  css: <SiCss className="inline-block mr-2" size={24} color="white" />,
-  jupyter: <SiJupyter className="inline-block mr-2" size={24} color="white" />,
+  "c++": (
+    <SiCplusplus className="inline-block mr-2" size={24} color={iconColor} />
+  ),
+  swift: <SiSwift className="inline-block mr-2" size={24} color={iconColor} />,
+  kotlin: (
+    <SiKotlin className="inline-block mr-2" size={24} color={iconColor} />
+  ),
+  php: <SiPhp className="inline-block mr-2" size={24} color={iconColor} />,
+  ruby: <SiRuby className="inline-block mr-2" size={24} color={iconColor} />,
+  rust: <SiRust className="inline-block mr-2" size={24} color={iconColor} />,
+  julia: <SiJulia className="inline-block mr-2" size={24} color={iconColor} />,
+  html: <SiHtml5 className="inline-block mr-2" size={24} color={iconColor} />,
+  css: <SiCss className="inline-block mr-2" size={24} color={iconColor} />,
+  jupyter: (
+    <SiJupyter className="inline-block mr-2" size={24} color={iconColor} />
+  ),
   "jupyter-notebook": (
-    <SiJupyter className="inline-block mr-2" size={24} color="white" />
+    <SiJupyter className="inline-block mr-2" size={24} color={iconColor} />
   ),
 };
 
@@ -77,7 +86,7 @@ export default function LanguagesChart({ data }: { data: LanguageEntry[] }) {
       className="w-full max-w-4xl mx-auto bg-transparent border-none shadow-none"
     >
       <CardHeader>
-        <CardTitle className="text-center text-white text-md md:text-lg">
+        <CardTitle className="text-center text-foreground text-md md:text-lg">
           Programming Languages
         </CardTitle>
       </CardHeader>
@@ -93,22 +102,19 @@ export default function LanguagesChart({ data }: { data: LanguageEntry[] }) {
               bottom: 20,
             }}
           >
-            <CartesianGrid
-              strokeDasharray="3 3"
-              stroke="rgba(255,255,255,0.2)"
-            />
+            <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
             <XAxis
               type="number"
-              tick={{ fill: "white" }}
-              axisLine={{ stroke: "white" }}
-              tickLine={{ stroke: "white" }}
+              tick={{ fill: "var(--color-foreground)" }}
+              axisLine={{ stroke: "var(--color-foreground)" }}
+              tickLine={{ stroke: "var(--color-foreground)" }}
               domain={[0, 100]}
               tickFormatter={(value) => `${value}%`}
             />
             <YAxis
               type="category"
               dataKey="language"
-              axisLine={{ stroke: "white" }}
+              axisLine={{ stroke: "var(--color-foreground)" }}
               tickLine={false}
               width={isMobile ? 40 : 160}
               tick={(props) => (
@@ -117,12 +123,13 @@ export default function LanguagesChart({ data }: { data: LanguageEntry[] }) {
             />
             <Tooltip
               contentStyle={{
-                backgroundColor: "rgba(31, 41, 55, 0.8)",
+                backgroundColor:
+                  "color-mix(in srgb, var(--color-secondary) 85%, transparent)",
                 border: "none",
               }}
-              labelStyle={{ color: "white" }}
-              itemStyle={{ color: colors.purple[400] }}
-              cursor={{ fill: "rgba(255, 255, 255, 0.1)" }}
+              labelStyle={{ color: "var(--color-foreground)" }}
+              itemStyle={{ color: "var(--color-chart-2)" }}
+              cursor={{ fill: "var(--color-border)" }}
               formatter={(value: number) => `${value.toLocaleString()}%`}
             />
             <Bar
@@ -135,13 +142,15 @@ export default function LanguagesChart({ data }: { data: LanguageEntry[] }) {
                 <Cell
                   key={`cell-${index}`}
                   className="hover-target"
-                  fill={index < 2 ? colors.purple[400] : colors.purple[600]}
+                  fill={
+                    index < 2 ? "var(--color-chart-2)" : "var(--color-chart-4)"
+                  }
                 />
               ))}
               <LabelList
                 dataKey="value"
                 position="right"
-                fill="white"
+                fill="var(--color-foreground)"
                 formatter={(val: number) => `${val}%`}
               />
             </Bar>
@@ -176,7 +185,7 @@ const CustomYAxisTick = ({ x, y, payload, isMobile }: CustomTickProps) => {
           x={iconOffset}
           y={0}
           textAnchor="end"
-          fill="white"
+          fill="var(--color-foreground)"
           fontSize="12"
           dy="0.3em"
         >
