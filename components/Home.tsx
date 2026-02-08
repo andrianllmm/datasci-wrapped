@@ -83,20 +83,25 @@ export default function Home() {
             })}
           </div>
 
-          <motion.div {...fadeInUp(0.5)}>
-            <Button
-              asChild={true}
-              variant="secondary"
-              className="mt-12 transition-transform duration-200 hover:-translate-y-1"
-            >
+          <motion.div
+            {...fadeInUp(0.5)}
+            className="flex items-center justify-center gap-3"
+          >
+            <Button asChild variant="link">
               <a
                 href="https://github.com/andrianllmm/datasci-wrapped"
                 target="_blank"
                 rel="noreferrer"
+                className="flex items-center gap-2"
               >
                 <SiGithub />
-                View Source Code
+                Source Code
               </a>
+            </Button>
+            <Button asChild variant="link">
+              <Link href="/about">
+                <span>About</span>
+              </Link>
             </Button>
           </motion.div>
         </div>
