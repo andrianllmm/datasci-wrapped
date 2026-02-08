@@ -4,6 +4,7 @@ import { fadeInUp, bounceY, scrollDot, fadeInDown } from "@/lib/animations";
 import { PersonalWrappedData } from "@/types/wrapped";
 import { Button } from "@/components/ui/button";
 import { Pencil } from "lucide-react";
+import BackHomeButton from "@/components/BackHomeButton";
 
 export default function PersonalIntroSlide({
   data,
@@ -19,6 +20,8 @@ export default function PersonalIntroSlide({
 
   return (
     <Slide>
+      <BackHomeButton />
+
       {/* Edit Button - Fixed Position */}
       {onEdit && (
         <motion.div

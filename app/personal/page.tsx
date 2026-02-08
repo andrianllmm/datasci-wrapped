@@ -12,8 +12,7 @@ import { PersonalWrappedData } from "@/types/wrapped";
 import { Button } from "@/components/ui/button";
 import { motion } from "motion/react";
 import { fadeInUp } from "@/lib/animations";
-import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import BackHomeButton from "@/components/BackHomeButton";
 
 const STORAGE_KEY = "datasci-wrapped-profile";
 
@@ -77,11 +76,8 @@ export default function PersonalWrappedPage() {
   if (wrappedData) {
     return (
       <>
-        <PersonalWrapped 
-          data={wrappedData} 
-          onEdit={() => setIsEditing(true)}
-        />
-        
+        <PersonalWrapped data={wrappedData} onEdit={() => setIsEditing(true)} />
+
         {/* Edit Modal Overlay */}
         {isEditing && (
           <motion.div
@@ -109,13 +105,13 @@ export default function PersonalWrappedPage() {
                   Update your username or ID to regenerate your wrapped
                 </p>
               </div>
-              
+
               <UserProfileForm
                 onSubmit={handleSubmit}
                 isLoading={isLoading}
                 initialProfile={cachedProfile}
               />
-              
+
               {error && (
                 <motion.div
                   {...fadeInUp(0.2)}
@@ -124,7 +120,7 @@ export default function PersonalWrappedPage() {
                   <p className="text-red-200 text-sm">{error}</p>
                 </motion.div>
               )}
-              
+
               <Button
                 variant="outline"
                 onClick={() => setIsEditing(false)}
@@ -141,18 +137,9 @@ export default function PersonalWrappedPage() {
 
   return (
     <div className="min-h-screen w-screen bg-background">
+      <BackHomeButton />
       <Slide>
         <div className="flex flex-col justify-center items-center max-w-4xl mx-auto">
-          <motion.div {...fadeInUp()} className="mb-8">
-            <Link
-              href="/"
-              className="flex items-center gap-1 text-primary hover:text-foreground transition-colors"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              Back to Home
-            </Link>
-          </motion.div>
-
           <motion.h2
             {...fadeInUp()}
             className="max-w-md px-6 mx-auto text-2xl md:text-3xl font-bold text-foreground text-center mb-8"
