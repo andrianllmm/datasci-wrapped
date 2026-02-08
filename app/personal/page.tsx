@@ -38,6 +38,24 @@ const isCacheExpired = (cachedData: CachedWrappedData): boolean => {
   return Date.now() - cachedData.timestamp > CACHE_TTL_MS;
 };
 
+/**
+ * Validate that cached data has the correct structure
+ */
+const isValidCachedData = (data: any): data is CachedWrappedData => {
+  return (
+    data &&
+    typeof data === "object" &&
+    data.data &&
+    typeof data.data === "object" &&
+    typeof data.timestamp === "number" &&
+    Array.isArray(data.data.repo) &&
+    Array.isArray(data.data.reputation) &&
+    Array.isArray(data.data.achievements) &&
+    Array.isArray(data.data.tools) &&
+    Array.isArray(data.data.languages)
+  );
+};
+
 export default function PersonalWrappedPage() {
   const [wrappedData, setWrappedData] = useState<PersonalWrappedData | null>(
     null,
@@ -62,7 +80,15 @@ export default function PersonalWrappedPage() {
 
         if (cachedDataStr) {
           try {
-            const cachedData: CachedWrappedData = JSON.parse(cachedDataStr);
+            const cachedData = JSON.parse(cachedDataStr);
+
+            // Validate cached data structure
+            if (!isValidCachedData(cachedData)) {
+              console.warn("Invalid cached data structure, clearing cache");
+              localStorage.removeItem(cacheKey);
+              handleSubmit(profile);
+              return;
+            }
 
             // Check if cache has expired
             if (!isCacheExpired(cachedData)) {
@@ -73,7 +99,8 @@ export default function PersonalWrappedPage() {
             }
           } catch (e) {
             console.error("Failed to load cached wrapped data", e);
-            // If cache is corrupted, fetch fresh data
+            // If cache is corrupted, remove it and fetch fresh
+            localStorage.removeItem(cacheKey);
             handleSubmit(profile);
           }
         } else {
@@ -94,12 +121,23 @@ export default function PersonalWrappedPage() {
       // If profile changed, clear old cache
       if (cachedProfile) {
         const oldCacheKey = generateCacheKey(cachedProfile);
-        if (oldCacheKey !== generateCacheKey(profile)) {
+        const newCacheKey = generateCacheKey(profile);
+        if (oldCacheKey !== newCacheKey) {
           localStorage.removeItem(oldCacheKey);
         }
       }
 
       const data = await generatePersonalWrapped(profile);
+
+      // Validate that we got proper data
+      if (
+        !data ||
+        !Array.isArray(data.repo) ||
+        !Array.isArray(data.reputation)
+      ) {
+        throw new Error("Received invalid data structure from API");
+      }
+
       setWrappedData(data);
       setCachedProfile(profile);
 
