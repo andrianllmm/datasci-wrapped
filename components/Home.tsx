@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { catalog } from "@/data/catalog";
 import { fadeInDown, fadeInUp, slideInLeft } from "@/lib/animations";
 import { SiGithub } from "@icons-pack/react-simple-icons";
-import { LucideArrowUpRight, StarsIcon } from "lucide-react";
+import { LucideArrowUpRight, MessageCircle, StarsIcon } from "lucide-react";
 import { motion } from "motion/react";
 import Link from "next/link";
 
@@ -83,19 +83,35 @@ export default function Home() {
             })}
           </div>
 
-          <motion.div {...fadeInUp(0.5)}>
-            <Button
-              asChild={true}
-              variant="secondary"
-              className="mt-12 transition-transform duration-200 hover:-translate-y-1"
-            >
+          <motion.div
+            {...fadeInUp(0.5)}
+            className="flex items-center justify-center gap-2"
+          >
+            <Button asChild variant="link">
+              <Link href="/about">
+                <span className="text-base">About</span>
+              </Link>
+            </Button>
+            <Button asChild variant="link">
+              <Link href="/faq">
+                <span className="text-base">FAQ</span>
+              </Link>
+            </Button>
+            <Button asChild variant="link">
+              <Link href="/discussions" className="flex items-center gap-1">
+                <MessageCircle className="w-4 h-4" />
+                <span className="text-base">Discussions</span>
+              </Link>
+            </Button>
+            <Button asChild variant="link">
               <a
                 href="https://github.com/andrianllmm/datasci-wrapped"
                 target="_blank"
                 rel="noreferrer"
+                className="flex items-center gap-2"
               >
                 <SiGithub />
-                View Source Code
+                <span className="text-base">Source Code</span>
               </a>
             </Button>
           </motion.div>

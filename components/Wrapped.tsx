@@ -10,7 +10,12 @@ import RolesSlide from "@/components/slides/RolesSlide";
 import { WrappedData } from "@/types/wrapped";
 import BackHomeButton from "@/components/BackHomeButton";
 
-export default function Wrapped({ data }: { data: WrappedData }) {
+type WrappedProps = {
+  data: WrappedData;
+  children?: React.ReactNode;
+};
+
+export default function Wrapped({ data, children }: WrappedProps) {
   return (
     <div className="snap-y snap-mandatory h-screen w-screen overflow-y-scroll bg-background">
       <BackHomeButton />
@@ -21,6 +26,7 @@ export default function Wrapped({ data }: { data: WrappedData }) {
       <ToolsSlide data={data} />
       <LanguagesSlide data={data} />
       <OutroSlide data={data} />
+      {children}
     </div>
   );
 }

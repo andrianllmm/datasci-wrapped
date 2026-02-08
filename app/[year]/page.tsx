@@ -1,6 +1,7 @@
 import { catalog } from "@/data/catalog";
 import Wrapped from "../../components/Wrapped";
 import Slide from "@/components/Slide";
+import GiscusComments from "@/components/GiscusComments";
 
 type PageProps = {
   params: Promise<{ year: string }>;
@@ -35,5 +36,16 @@ export default async function Page({ params }: PageProps) {
     );
   }
 
-  return <Wrapped data={data} />;
+  return (
+    <Wrapped data={data}>
+      <Slide scrollable>
+        <div className="flex flex-col gap-4 max-w-4xl mx-auto px-6">
+          <GiscusComments
+            term={`datasci-wrapped-${year}`}
+            title={`Discussion on ${year} DataSci Wrapped`}
+          />
+        </div>
+      </Slide>
+    </Wrapped>
+  );
 }
