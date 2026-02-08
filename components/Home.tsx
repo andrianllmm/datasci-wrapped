@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { catalog } from "@/data/catalog";
 import { fadeInDown, fadeInUp, slideInLeft } from "@/lib/animations";
 import { SiGithub } from "@icons-pack/react-simple-icons";
-import { LucideArrowUpRight, StarsIcon } from "lucide-react";
+import { LucideArrowUpRight, MessageCircle, StarsIcon } from "lucide-react";
 import { motion } from "motion/react";
 import Link from "next/link";
 
@@ -95,6 +95,12 @@ export default function Home() {
             <Button asChild variant="link">
               <Link href="/faq">
                 <span className="text-base">FAQ</span>
+              </Link>
+            </Button>
+            <Button asChild variant="link">
+              <Link href="/discussions" className="flex items-center gap-1">
+                <MessageCircle className="w-4 h-4" />
+                <span className="text-base">Discussions</span>
               </Link>
             </Button>
             <Button asChild variant="link">
