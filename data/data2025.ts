@@ -1,4 +1,4 @@
-import { WrappedData } from "./types";
+import { WrappedData } from "../types/wrapped";
 
 export const wrappedData2025: WrappedData = {
   year: 2025,

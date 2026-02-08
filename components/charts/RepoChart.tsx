@@ -14,9 +14,21 @@ import {
 } from "recharts";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import colors from "tailwindcss/colors";
-import { DataVolumeEntry } from "@/types/wrapped";
+import { RepoEntry } from "@/types/wrapped";
 
-export default function DataVolumeChart({ data }: { data: DataVolumeEntry[] }) {
+const activityColorPalette = [
+  colors.purple[400],
+  colors.purple[500],
+  colors.purple[600],
+];
+
+const formatMonth = (month: string) => {
+  const [year, monthNum] = month.split("-");
+  const date = new Date(parseInt(year), parseInt(monthNum) - 1);
+  return date.toLocaleDateString("en-US", { month: "short", year: "numeric" });
+};
+
+export default function RepoChart({ data }: { data: RepoEntry[] }) {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.3 });
   const [animate, setAnimate] = useState(false);
 
@@ -31,7 +43,7 @@ export default function DataVolumeChart({ data }: { data: DataVolumeEntry[] }) {
     >
       <CardHeader>
         <CardTitle className="text-center text-white text-md md:text-lg">
-          Volume of Data Created, Captured, Copied And Consumed Worldwide
+          Your Repository Creation Timeline
         </CardTitle>
       </CardHeader>
       <CardContent>
@@ -45,49 +57,54 @@ export default function DataVolumeChart({ data }: { data: DataVolumeEntry[] }) {
               stroke="rgba(255,255,255,0.2)"
             />
             <XAxis
-              dataKey="year"
-              tick={{ fill: "white" }}
+              dataKey="month"
+              tick={{ fill: "white", fontSize: 11 }}
               axisLine={{ stroke: "white" }}
               tickLine={{ stroke: "white" }}
+              angle={-45}
+              textAnchor="end"
+              height={80}
+              tickFormatter={formatMonth}
+              interval="preserveStartEnd"
             />
             <YAxis
               tick={{ fill: "white" }}
               axisLine={{ stroke: "white" }}
               tickLine={{ stroke: "white" }}
               label={{
-                value: "(in zettabytes)",
+                value: "Repositories",
                 angle: -90,
                 position: "insideLeft",
                 fill: "white",
               }}
             />
             <Tooltip
+              formatter={(value) => `${value} repos`}
               contentStyle={{
-                backgroundColor: "rgba(31, 41, 55, 0.8)",
+                backgroundColor: "rgba(31, 41, 55, 0.85)",
                 border: "none",
               }}
               labelStyle={{ color: "white" }}
-              itemStyle={{ color: "#A78BFA" }}
-              cursor={{ fill: "rgba(255, 255, 255, 0.1)" }}
+              itemStyle={{ color: colors.purple[400] }}
+              cursor={{ fill: "rgba(255,255,255,0.1)" }}
             />
-            <Bar
-              dataKey="zettabytes"
-              radius={[4, 4, 0, 0]}
-              isAnimationActive={animate}
-              animationDuration={1500}
-            >
-              {data.map((entry, index) => (
-                <Cell
-                  key={`cell-${index}`}
-                  className="hover-target"
-                  fill={
-                    entry.year === new Date().getFullYear()
-                      ? colors.purple[400]
-                      : colors.purple[600]
-                  }
-                />
-              ))}
-            </Bar>
+            {animate && (
+              <Bar
+                dataKey="count"
+                fill={colors.purple[400]}
+                isAnimationActive={true}
+                animationDuration={800}
+              >
+                {data.map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={
+                      activityColorPalette[index % activityColorPalette.length]
+                    }
+                  />
+                ))}
+              </Bar>
+            )}
           </BarChart>
         </ResponsiveContainer>
       </CardContent>

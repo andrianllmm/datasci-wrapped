@@ -1,4 +1,4 @@
-import { WrappedDataCatalog } from "./types";
+import { WrappedDataCatalog } from "../types/wrapped";
 import { wrappedData2025 } from "./data2025";
 
 export const catalog: WrappedDataCatalog = {

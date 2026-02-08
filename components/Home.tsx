@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { catalog } from "@/data/catalog";
 import { fadeInDown, fadeInUp, slideInLeft } from "@/lib/animations";
 import { SiGithub } from "@icons-pack/react-simple-icons";
-import { LucideArrowUpRight } from "lucide-react";
+import { LucideArrowUpRight, StarsIcon } from "lucide-react";
 import { motion } from "motion/react";
 import Link from "next/link";
 
@@ -38,11 +38,29 @@ export default function Home() {
             </span>
           </motion.h1>
 
+          <motion.div {...fadeInUp(0.2)} className="mb-8">
+            <Button
+              asChild
+              size="lg"
+              className="bg-purple-600 hover:bg-purple-500 text-white font-bold text-lg px-8 py-6 rounded-xl transition-all duration-200 hover:-translate-y-1 shadow-lg"
+            >
+              <Link href="/personal" className="flex gap-2 items-center">
+                <StarsIcon /> Unwrap Your Year in Data Science
+              </Link>
+            </Button>
+          </motion.div>
+
+          <motion.div {...fadeInUp(0.3)} className="mb-6">
+            <p className="text-purple-300 text-center">
+              or view industry trends
+            </p>
+          </motion.div>
+
           <div className="flex flex-col justify-between items-start mb-12">
             {years.map((year, index) => {
               const isLatest = index === 0; // First year in the filtered list is the latest
               return (
-                <motion.div key={year} {...slideInLeft(index * 0.1 + 0.1)}>
+                <motion.div key={year} {...slideInLeft(index * 0.1 + 0.4)}>
                   <Button
                     variant="link"
                     asChild

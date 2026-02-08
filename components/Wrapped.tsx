@@ -7,7 +7,7 @@ import LanguagesSlide from "@/components/slides/LanguagesSlide";
 import MarketSizeSlide from "@/components/slides/MarketSizeSlide";
 import OutroSlide from "@/components/slides/OutroSlide";
 import RolesSlide from "@/components/slides/RolesSlide";
-import { WrappedData } from "@/data/types";
+import { WrappedData } from "@/types/wrapped";
 
 export default function Wrapped({ data }: { data: WrappedData }) {
   return (

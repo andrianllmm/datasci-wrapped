@@ -3,7 +3,7 @@ import { fadeInUp } from "@/lib/animations";
 import { ScrollAnimate } from "../ScrollAnimate";
 import { Button } from "../ui/button";
 import { SiGithub } from "@icons-pack/react-simple-icons";
-import { WrappedData } from "@/data/types";
+import { WrappedData } from "@/types/wrapped";
 import Link from "next/link";
 
 export default function OutroSlide({ data }: { data: WrappedData }) {

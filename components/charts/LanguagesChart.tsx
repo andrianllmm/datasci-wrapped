@@ -21,17 +21,47 @@ import {
   SiR,
   SiScala,
   SiGo,
+  SiJavascript,
+  SiTypescript,
+  SiCplusplus,
+  SiSwift,
+  SiKotlin,
+  SiPhp,
+  SiRuby,
+  SiRust,
+  SiJulia,
+  SiHtml5,
+  SiCss,
+  SiJupyter,
 } from "@icons-pack/react-simple-icons";
-import { LanguageEntry } from "@/data/types";
+import { LanguageEntry } from "@/types/wrapped";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
-const LanguageIcions = {
+const LanguageIcons = {
   python: <SiPython className="inline-block mr-2" size={24} color="white" />,
   sql: <SiSqlite className="inline-block mr-2" size={24} color="white" />,
   r: <SiR className="inline-block mr-2" size={24} color="white" />,
-  java: null,
   scala: <SiScala className="inline-block mr-2" size={24} color="white" />,
   go: <SiGo className="inline-block mr-2" size={24} color="white" />,
+  javascript: (
+    <SiJavascript className="inline-block mr-2" size={24} color="white" />
+  ),
+  typescript: (
+    <SiTypescript className="inline-block mr-2" size={24} color="white" />
+  ),
+  "c++": <SiCplusplus className="inline-block mr-2" size={24} color="white" />,
+  swift: <SiSwift className="inline-block mr-2" size={24} color="white" />,
+  kotlin: <SiKotlin className="inline-block mr-2" size={24} color="white" />,
+  php: <SiPhp className="inline-block mr-2" size={24} color="white" />,
+  ruby: <SiRuby className="inline-block mr-2" size={24} color="white" />,
+  rust: <SiRust className="inline-block mr-2" size={24} color="white" />,
+  julia: <SiJulia className="inline-block mr-2" size={24} color="white" />,
+  html: <SiHtml5 className="inline-block mr-2" size={24} color="white" />,
+  css: <SiCss className="inline-block mr-2" size={24} color="white" />,
+  jupyter: <SiJupyter className="inline-block mr-2" size={24} color="white" />,
+  "jupyter-notebook": (
+    <SiJupyter className="inline-block mr-2" size={24} color="white" />
+  ),
 };
 
 export default function LanguagesChart({ data }: { data: LanguageEntry[] }) {
@@ -48,7 +78,7 @@ export default function LanguagesChart({ data }: { data: LanguageEntry[] }) {
     >
       <CardHeader>
         <CardTitle className="text-center text-white text-md md:text-lg">
-          Required Programming Languages
+          Programming Languages
         </CardTitle>
       </CardHeader>
       <CardContent>
@@ -133,12 +163,26 @@ interface CustomTickProps {
 
 const CustomYAxisTick = ({ x, y, payload, isMobile }: CustomTickProps) => {
   const language = String(payload?.value).toLowerCase();
-  const icon = LanguageIcions[language as keyof typeof LanguageIcions];
+  const icon = LanguageIcons[language as keyof typeof LanguageIcons];
   const iconOffset = isMobile ? -24 : -40;
 
   return (
     <g transform={`translate(${x},${y})`}>
-      {icon && <g transform={`translate(${iconOffset}, -12)`}>{icon}</g>}
+      {icon ? (
+        <g transform={`translate(${iconOffset}, -12)`}>{icon}</g>
+      ) : (
+        // Fallback to text label
+        <text
+          x={iconOffset}
+          y={0}
+          textAnchor="end"
+          fill="white"
+          fontSize="12"
+          dy="0.3em"
+        >
+          {payload?.value}
+        </text>
+      )}
     </g>
   );
 };
