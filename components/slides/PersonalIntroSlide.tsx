@@ -19,7 +19,7 @@ export default function PersonalIntroSlide({
 
   return (
     <Slide>
-      {/* Edit Button - Absolute Position */}
+      {/* Edit Button */}
       {onEdit && (
         <motion.div
           {...fadeInUp(0.1)}
@@ -55,7 +55,7 @@ export default function PersonalIntroSlide({
           </motion.h1>
           <motion.h2
             {...fadeInUp(isNameAvailable ? 0.3 : 0.2)}
-            className="text-4xl md:text-5xl font-bold text-foreground/90 mb-8"
+            className="text-4xl md:text-6xl font-bold text-primary mb-8"
           >
             {data.year}
           </motion.h2>
