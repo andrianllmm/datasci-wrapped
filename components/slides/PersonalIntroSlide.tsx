@@ -21,26 +21,26 @@ export default function PersonalIntroSlide({
           {isNameAvailable && (
             <motion.p
               {...fadeInDown()}
-              className="text-2xl md:text-3xl font-semibold text-purple-300 mb-4"
+              className="text-2xl md:text-3xl font-semibold text-primary/90 mb-4"
             >
               Hey there, {userName}!
             </motion.p>
           )}
           <motion.h1
             {...fadeInDown(isNameAvailable ? 0.1 : 0)}
-            className="text-5xl md:text-6xl font-black text-white mb-4"
+            className="text-5xl md:text-6xl font-black text-foreground mb-4"
           >
             Your DataSci Wrapped
           </motion.h1>
           <motion.h2
             {...fadeInUp(isNameAvailable ? 0.3 : 0.2)}
-            className="text-4xl md:text-5xl font-bold text-purple-100 mb-8"
+            className="text-4xl md:text-5xl font-bold text-foreground/90 mb-8"
           >
             {data.year}
           </motion.h2>
           <motion.p
             {...fadeInUp(isNameAvailable ? 0.4 : 0.3)}
-            className="text-lg md:text-xl text-purple-100"
+            className="text-lg md:text-xl text-foreground/90"
           >
             Your personal data science journey
           </motion.p>
@@ -48,11 +48,13 @@ export default function PersonalIntroSlide({
 
         {/* Scroll Indicator */}
         <motion.div className="flex flex-col items-center" {...bounceY(8)}>
-          <div className="text-purple-400 text-sm mb-2">Scroll to explore</div>
-          <div className="w-6 h-10 border-2 border-purple-400 rounded-full relative overflow-hidden flex items-start justify-center">
+          <div className="text-muted-foreground text-sm mb-2">
+            Scroll to explore
+          </div>
+          <div className="w-6 h-10 border-2 border-primary/70 rounded-full relative overflow-hidden flex items-start justify-center">
             <motion.div
               {...scrollDot(4, 12)}
-              className="w-1 h-2 bg-purple-400 rounded-full"
+              className="w-1 h-2 bg-primary/70 rounded-full"
             />
           </div>
         </motion.div>

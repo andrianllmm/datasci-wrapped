@@ -12,7 +12,6 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import colors from "tailwindcss/colors";
 import { ReputationEntry } from "@/types/wrapped";
 
 const formatNumber = (value: number) => value.toLocaleString("en-US");
@@ -34,7 +33,7 @@ export default function ReputationChart({ data }: { data: ReputationEntry[] }) {
   if (data.length === 0 || data.every((d) => d.reputation === 0)) {
     return (
       <Card className="w-full max-w-4xl mx-auto bg-transparent border-none shadow-none">
-        <CardContent className="flex items-center justify-center h-96 text-purple-200">
+        <CardContent className="flex items-center justify-center h-96 text-muted-foreground">
           <p>No StackOverflow data available</p>
         </CardContent>
       </Card>
@@ -47,7 +46,7 @@ export default function ReputationChart({ data }: { data: ReputationEntry[] }) {
       className="w-full max-w-4xl mx-auto bg-transparent border-none shadow-none"
     >
       <CardHeader>
-        <CardTitle className="text-center text-white text-md md:text-lg">
+        <CardTitle className="text-center text-foreground text-md md:text-lg">
           Your StackOverflow Reputation Growth
         </CardTitle>
       </CardHeader>
@@ -57,15 +56,12 @@ export default function ReputationChart({ data }: { data: ReputationEntry[] }) {
             data={data}
             margin={{ top: 20, right: 30, left: 0, bottom: 20 }}
           >
-            <CartesianGrid
-              strokeDasharray="3 3"
-              stroke="rgba(255,255,255,0.2)"
-            />
+            <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
             <XAxis
               dataKey="month"
-              tick={{ fill: "white", fontSize: 11 }}
-              axisLine={{ stroke: "white" }}
-              tickLine={{ stroke: "white" }}
+              tick={{ fill: "var(--color-foreground)", fontSize: 11 }}
+              axisLine={{ stroke: "var(--color-foreground)" }}
+              tickLine={{ stroke: "var(--color-foreground)" }}
               angle={-45}
               textAnchor="end"
               height={80}
@@ -73,31 +69,33 @@ export default function ReputationChart({ data }: { data: ReputationEntry[] }) {
               interval="preserveStartEnd"
             />
             <YAxis
-              tick={{ fill: "white" }}
-              axisLine={{ stroke: "white" }}
+              tick={{ fill: "var(--color-foreground)" }}
+              axisLine={{ stroke: "var(--color-foreground)" }}
               label={{
                 value: "Reputation",
                 angle: -90,
                 position: "insideLeft",
+                fill: "var(--color-foreground)",
               }}
             />
             <Tooltip
               formatter={(value: number) => formatNumber(value)}
               contentStyle={{
-                backgroundColor: "rgba(31, 41, 55, 0.85)",
+                backgroundColor:
+                  "color-mix(in srgb, var(--color-secondary) 85%, transparent)",
                 border: "none",
               }}
-              labelStyle={{ color: "white" }}
-              itemStyle={{ color: colors.purple[300] }}
+              labelStyle={{ color: "var(--color-foreground)" }}
+              itemStyle={{ color: "var(--color-chart-1)" }}
               cursor={{ strokeDasharray: "3 3" }}
             />
             {animate && (
               <Line
                 type="monotone"
                 dataKey="reputation"
-                stroke={colors.purple[300]}
+                stroke="var(--color-chart-1)"
                 strokeWidth={3}
-                dot={{ fill: colors.purple[400], r: 5 }}
+                dot={{ fill: "var(--color-chart-2)", r: 5 }}
                 activeDot={{ r: 7 }}
                 isAnimationActive={true}
                 animationDuration={800}

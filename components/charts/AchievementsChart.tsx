@@ -13,15 +13,14 @@ import {
   Cell,
 } from "recharts";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import colors from "tailwindcss/colors";
 import { AchievementEntry } from "@/types/wrapped";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
 const colorPalette = [
-  colors.purple[300],
-  colors.purple[400],
-  colors.purple[500],
-  colors.purple[600],
+  "var(--color-chart-1)",
+  "var(--color-chart-2)",
+  "var(--color-chart-3)",
+  "var(--color-chart-4)",
 ];
 
 const formatNumber = (value: number) => value.toLocaleString("en-US");
@@ -45,7 +44,7 @@ export default function AchievementsChart({
       className="w-full max-w-4xl mx-auto bg-transparent border-none shadow-none"
     >
       <CardHeader>
-        <CardTitle className="text-center text-white text-md md:text-lg">
+        <CardTitle className="text-center text-foreground text-md md:text-lg">
           Your Personal Achievements
         </CardTitle>
       </CardHeader>
@@ -64,36 +63,37 @@ export default function AchievementsChart({
           >
             <CartesianGrid
               strokeDasharray="3 3"
-              stroke="rgba(255,255,255,0.1)"
+              stroke="var(--color-border)"
               vertical={false}
             />
             <XAxis
               type="number"
-              tick={{ fill: "white", fontSize: 12 }}
-              axisLine={{ stroke: "white" }}
-              tickLine={{ stroke: "white" }}
+              tick={{ fill: "var(--color-foreground)", fontSize: 12 }}
+              axisLine={{ stroke: "var(--color-foreground)" }}
+              tickLine={{ stroke: "var(--color-foreground)" }}
             />
             <YAxis
               dataKey="label"
               type="category"
               tick={{
-                fill: "white",
+                fill: "var(--color-foreground)",
                 fontSize: isMobile ? 10 : 12,
               }}
-              axisLine={{ stroke: "white" }}
-              tickLine={{ stroke: "white" }}
+              axisLine={{ stroke: "var(--color-foreground)" }}
+              tickLine={{ stroke: "var(--color-foreground)" }}
               width={isMobile ? 100 : 140}
               interval={0}
             />
             <Tooltip
               formatter={(value: number) => formatNumber(value)}
               contentStyle={{
-                backgroundColor: "rgba(31, 41, 55, 0.85)",
+                backgroundColor:
+                  "color-mix(in srgb, var(--color-secondary) 85%, transparent)",
                 border: "none",
               }}
-              labelStyle={{ color: "white" }}
-              itemStyle={{ color: colors.purple[400] }}
-              cursor={{ fill: "rgba(255,255,255,0.1)" }}
+              labelStyle={{ color: "var(--color-foreground)" }}
+              itemStyle={{ color: "var(--color-chart-2)" }}
+              cursor={{ fill: "var(--color-border)" }}
             />
             <Bar
               dataKey="value"

@@ -36,12 +36,12 @@ export default function SlideBackground() {
 
   return (
     <>
-      <div className="absolute inset-0 bg-linear-to-br from-purple-700 to-purple-900" />
+      <div className="absolute inset-0 bg-linear-to-br from-background to-secondary" />
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {bubbles.map((bubble, index) => (
           <motion.div
             key={index}
-            className="absolute rounded-full bg-purple-400 opacity-5"
+            className="absolute rounded-full bg-primary opacity-5"
             style={{
               width: bubble.width,
               height: bubble.height,

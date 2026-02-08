@@ -54,7 +54,7 @@ export default function UserProfileForm({
       <motion.div {...fadeInUp(0.1)}>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-2">
-            <Label htmlFor="github" className="text-purple-200 font-semibold">
+            <Label htmlFor="github" className="text-foreground font-semibold">
               GitHub Username
             </Label>
             <Input
@@ -63,9 +63,9 @@ export default function UserProfileForm({
               value={githubUsername}
               onChange={(e) => setGithubUsername(e.target.value)}
               placeholder="octocat"
-              className="w-full px-4 py-3 rounded-lg bg-purple-800/30 border-2 border-purple-400/30 focus:outline-none focus:border-purple-400 focus:ring-0 placeholder-purple-300/50! text-white!"
+              className="w-full px-4 py-3 rounded-lg bg-muted/30 border border-border text-foreground placeholder:text-muted-foreground/70"
             />
-            <p className="text-xs text-purple-300/70">
+            <p className="text-xs text-muted-foreground/70">
               We&apos;ll analyze your public repositories and contributions
             </p>
           </div>
@@ -73,7 +73,7 @@ export default function UserProfileForm({
           <div className="space-y-2">
             <Label
               htmlFor="stackoverflow"
-              className="text-purple-200 font-semibold"
+              className="text-foreground font-semibold"
             >
               StackOverflow User ID
             </Label>
@@ -83,9 +83,9 @@ export default function UserProfileForm({
               value={stackoverflowId}
               onChange={(e) => setStackoverflowId(e.target.value)}
               placeholder="123456"
-              className="w-full px-4 py-3 rounded-lg bg-purple-800/30 border-2 border-purple-400/30 focus:outline-none focus:border-purple-400 focus:ring-0 placeholder-purple-300/50! text-white!"
+              className="w-full px-4 py-3 rounded-lg bg-muted/30 border border-border text-foreground placeholder:text-muted-foreground/70"
             />
-            <p className="text-xs text-purple-300/70">
+            <p className="text-xs text-muted-foreground/70">
               Find it in your StackOverflow profile URL
             </p>
           </div>
@@ -96,7 +96,7 @@ export default function UserProfileForm({
               disabled={
                 isLoading || (!githubUsername.trim() && !stackoverflowId.trim())
               }
-              className="flex items-center gap-1 w-full py-6 text-lg font-bold bg-purple-500 hover:bg-purple-400 text-white rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex items-center gap-1 w-full py-6 text-lg font-bold rounded-lg transition-all"
             >
               <StarsIcon className="w-5 h-5" />
               {isLoading ? "Unwrapping Your Wrapped..." : "Unwrap My Wrapped"}
@@ -105,7 +105,7 @@ export default function UserProfileForm({
 
           <motion.p
             {...fadeInUp(0.3)}
-            className="flex justify-center items-center gap-1 text-sm text-purple-300/70 text-center"
+            className="flex justify-center items-center gap-1 text-sm text-muted-foreground/70 text-center"
           >
             <LockOpen className="w-4 h-4" />
             We only use public APIs. No login required!{" "}

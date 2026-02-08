@@ -23,14 +23,14 @@ export default function Home() {
         <div className="flex flex-col justify-between items-center x-6 max-w-4xl mx-auto">
           <motion.h1
             {...fadeInDown()}
-            className="text-center text-3xl md:text-5xl sm:text-4xl font-black text-purple-200 mb-0 flex gap-3"
+            className="text-center text-3xl md:text-5xl sm:text-4xl font-black text-primary mb-0 flex gap-3"
           >
             Welcome to the
           </motion.h1>
 
           <motion.h1
             {...fadeInDown(0.1)}
-            className="text-center text-4xl md:text-6xl sm:text-5xl font-black text-white mb-12 flex justify-center items-end gap-2"
+            className="text-center text-4xl md:text-6xl sm:text-5xl font-black text-foreground mb-12 flex justify-center items-end gap-2"
           >
             DataSci{" "}
             <span className="hover-target text-5xl md:text-7xl sm:text-6xl">
@@ -42,7 +42,7 @@ export default function Home() {
             <Button
               asChild
               size="lg"
-              className="bg-purple-600 hover:bg-purple-500 text-white font-bold text-lg px-8 py-6 rounded-xl transition-all duration-200 hover:-translate-y-1 shadow-lg"
+              className="font-bold text-lg px-8 py-6 rounded-xl transition-all duration-200 hover:-translate-y-1 shadow-lg"
             >
               <Link href="/personal" className="flex gap-2 items-center">
                 <StarsIcon /> Unwrap Your Year in Data Science
@@ -51,7 +51,7 @@ export default function Home() {
           </motion.div>
 
           <motion.div {...fadeInUp(0.3)} className="mb-6">
-            <p className="text-purple-300 text-center">
+            <p className="text-muted-foreground text-center">
               or view industry trends
             </p>
           </motion.div>
@@ -64,15 +64,15 @@ export default function Home() {
                   <Button
                     variant="link"
                     asChild
-                    className={`flex justify-start text-purple-200 hover:text-purple-300 transition-transform duration-200 hover:-translate-y-1 ${
-                      isLatest ? "font-extrabold text-white" : ""
+                    className={`flex justify-start text-primary hover:text-primary/90 transition-transform duration-200 hover:-translate-y-1 ${
+                      isLatest ? "font-extrabold text-foreground" : ""
                     }`}
                   >
                     <Link href={`/${year}/`} className="text-xl flex gap-1">
                       {year}
                       <LucideArrowUpRight />
                       {isLatest && (
-                        <span className="ml-1 text-sm text-purple-300">
+                        <span className="ml-1 text-sm text-muted-foreground">
                           (Latest)
                         </span>
                       )}
@@ -86,7 +86,8 @@ export default function Home() {
           <motion.div {...fadeInUp(0.5)}>
             <Button
               asChild={true}
-              className="mt-12 bg-purple-900 text-white hover:bg-purple-800 transition-transform duration-200 hover:-translate-y-1"
+              variant="secondary"
+              className="mt-12 transition-transform duration-200 hover:-translate-y-1"
             >
               <a
                 href="https://github.com/andrianllmm/datasci-wrapped"

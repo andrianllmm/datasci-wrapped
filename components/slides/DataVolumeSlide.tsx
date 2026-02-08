@@ -10,7 +10,7 @@ export default function DataVolumeSlide({ data }: { data: WrappedData }) {
     <Slide>
       <div className="w-full h-full flex flex-col items-center justify-center">
         <ScrollAnimate animation={() => fadeInUp()}>
-          <h1 className="text-center text-3xl md:text-6xl sm:text-5xl font-black text-white mb-4 flex">
+          <h1 className="text-center text-3xl md:text-6xl sm:text-5xl font-black text-foreground mb-4 flex">
             <AnimatedCounter
               value={
                 (data.dataVolume.find((d) => d.year === data.year)
@@ -22,7 +22,7 @@ export default function DataVolumeSlide({ data }: { data: WrappedData }) {
         </ScrollAnimate>
         <DataVolumeChart data={data.dataVolume} />
         <ScrollAnimate animation={() => fadeInUp(0.2)}>
-          <h1 className="text-center text-2xl md:text-3xl font-bold text-purple-200 mb-4">
+          <h1 className="text-center text-2xl md:text-3xl font-bold text-primary mb-4">
             ...and we transformed this mountain into actionable insights
           </h1>
         </ScrollAnimate>

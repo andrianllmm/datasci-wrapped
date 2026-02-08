@@ -15,7 +15,7 @@ export default function PersonalWrapped({
   data: PersonalWrappedData;
 }) {
   return (
-    <div className="snap-y snap-mandatory h-screen w-screen overflow-y-scroll bg-purple-700">
+    <div className="snap-y snap-mandatory h-screen w-screen overflow-y-scroll bg-background">
       <PersonalIntroSlide data={data} />
       <PersonalAchievementsSlide data={data} />
       <PersonalReposSlide data={data} />
