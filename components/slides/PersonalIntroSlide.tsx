@@ -2,11 +2,16 @@ import Slide from "@/components/Slide";
 import { motion } from "motion/react";
 import { fadeInUp, bounceY, scrollDot, fadeInDown } from "@/lib/animations";
 import { PersonalWrappedData } from "@/types/wrapped";
+import { Button } from "@/components/ui/button";
+import { Pencil } from "lucide-react";
+import BackHomeButton from "@/components/BackHomeButton";
 
 export default function PersonalIntroSlide({
   data,
+  onEdit,
 }: {
   data: PersonalWrappedData;
+  onEdit?: () => void;
 }) {
   const userName =
     data.userMetadata?.name || data.userMetadata?.username || "there";
@@ -15,7 +20,26 @@ export default function PersonalIntroSlide({
 
   return (
     <Slide>
-      <div className="flex flex-col justify-between h-[80%] max-h-[80%] px-6 max-w-4xl mx-auto">
+      <BackHomeButton />
+
+      {/* Edit Button - Absolute Position */}
+      {onEdit && (
+        <motion.div
+          {...fadeInUp(0.1)}
+          className="absolute top-4 right-4 md:top-6 md:right-6 z-40"
+        >
+          <Button
+            onClick={onEdit}
+            variant="outline"
+            size="sm"
+            className="flex items-center gap-2 rounded-full px-3 py-2 md:px-4 md:py-2 border border-primary/30 hover:border-primary/70 hover:bg-primary/10 text-xs md:text-sm"
+          >
+            <Pencil className="w-4 h-4" />
+            <span className="hidden sm:inline">Edit Details</span>
+          </Button>
+        </motion.div>
+      )}
+      <div className="relative flex flex-col justify-between h-[80%] max-h-[80%] px-6 max-w-4xl mx-auto">
         {/* Intro Text */}
         <div className="text-center">
           {isNameAvailable && (

@@ -11,18 +11,20 @@ import { PersonalWrappedData } from "@/types/wrapped";
 
 export default function PersonalWrapped({
   data,
+  onEdit,
 }: {
   data: PersonalWrappedData;
+  onEdit?: () => void;
 }) {
   return (
     <div className="snap-y snap-mandatory h-screen w-screen overflow-y-scroll bg-background">
-      <PersonalIntroSlide data={data} />
+      <PersonalIntroSlide data={data} onEdit={onEdit} />
       <PersonalAchievementsSlide data={data} />
       <PersonalReposSlide data={data} />
       <PersonalReputationSlide data={data} />
       <PersonalToolsSlide data={data} />
       <PersonalLanguagesSlide data={data} />
-      <PersonalOutroSlide data={data} />
+      <PersonalOutroSlide data={data} onEdit={onEdit} />
     </div>
   );
 }

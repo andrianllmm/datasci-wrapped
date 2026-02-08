@@ -8,10 +8,12 @@ import MarketSizeSlide from "@/components/slides/MarketSizeSlide";
 import OutroSlide from "@/components/slides/OutroSlide";
 import RolesSlide from "@/components/slides/RolesSlide";
 import { WrappedData } from "@/types/wrapped";
+import BackHomeButton from "@/components/BackHomeButton";
 
 export default function Wrapped({ data }: { data: WrappedData }) {
   return (
     <div className="snap-y snap-mandatory h-screen w-screen overflow-y-scroll bg-background">
+      <BackHomeButton />
       <IntroSlide data={data} />
       <DataVolumeSlide data={data} />
       <MarketSizeSlide data={data} />
