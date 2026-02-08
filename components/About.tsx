@@ -15,6 +15,7 @@ import {
   ExternalLink,
   UserIcon,
 } from "lucide-react";
+import { UpdssocLogo } from "./ui/updssoc-logo";
 
 export default function About() {
   const features = [
@@ -75,8 +76,10 @@ export default function About() {
             personal contributions.
           </motion.p>
 
-          <motion.p {...fadeInUp()} className="text-muted-foreground italic">
-            Built by
+          <motion.p
+            {...fadeInUp()}
+            className="flex justify-center items-center gap-2 text-lg"
+          >
             <a
               href="https://andrianllmm.github.io"
               target="_blank"
@@ -86,6 +89,11 @@ export default function About() {
                 Andrian Lloyd Maagma
               </span>
             </a>
+            <span className="text-primary">X</span>
+            <span className="text-primary">
+              <UpdssocLogo className="size-6 inline-block mr-1" />
+              UP DSSoc
+            </span>
           </motion.p>
         </motion.div>
       </Slide>

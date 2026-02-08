@@ -8,6 +8,7 @@ import { SiGithub } from "@icons-pack/react-simple-icons";
 import { LucideArrowUpRight, MessageCircle, StarsIcon } from "lucide-react";
 import { motion } from "motion/react";
 import Link from "next/link";
+import { UpdssocLogo } from "./ui/updssoc-logo";
 
 const currentYear = new Date().getFullYear();
 const years = Object.keys(catalog)
@@ -30,11 +31,11 @@ export default function Home() {
 
           <motion.h1
             {...fadeInDown(0.1)}
-            className="text-center text-4xl md:text-6xl sm:text-5xl font-black text-foreground mb-12 flex justify-center items-end gap-2"
+            className="mb-12 flex justify-center items-center gap-2 w-full"
           >
-            DataSci{" "}
-            <span className="hover-target text-5xl md:text-7xl sm:text-6xl">
-              Wrapped
+            <UpdssocLogo className="size-8 md:size-16 sm:size-12 w-fit" />
+            <span className="hover-target w-fit text-4xl md:text-7xl sm:text-6xl font-black">
+              DataSci Wrapped
             </span>
           </motion.h1>
 
