@@ -14,7 +14,16 @@ import { motion } from "motion/react";
 import { fadeInUp } from "@/lib/animations";
 import BackHomeButton from "@/components/BackHomeButton";
 
-const STORAGE_KEY = "datasci-wrapped-profile";
+const PROFILE_STORAGE_KEY = "datasci-wrapped-profile";
+const WRAPPED_DATA_STORAGE_KEY = "datasci-wrapped-data";
+
+/**
+ * Generate a cache key based on the user profile
+ * This ensures different users don't share cached data
+ */
+const generateCacheKey = (profile: UserProfileInput) => {
+  return `${WRAPPED_DATA_STORAGE_KEY}:${profile.githubUsername || ""}:${profile.stackoverflowId || ""}`;
+};
 
 export default function PersonalWrappedPage() {
   const [wrappedData, setWrappedData] = useState<PersonalWrappedData | null>(
@@ -28,12 +37,29 @@ export default function PersonalWrappedPage() {
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
-    const stored = localStorage.getItem(STORAGE_KEY);
+    const stored = localStorage.getItem(PROFILE_STORAGE_KEY);
     if (stored) {
       try {
         const profile = JSON.parse(stored);
         setCachedProfile(profile);
-        handleSubmit(profile);
+
+        // Try to load cached wrapped data first
+        const cacheKey = generateCacheKey(profile);
+        const cachedData = localStorage.getItem(cacheKey);
+
+        if (cachedData) {
+          try {
+            const parsedData = JSON.parse(cachedData);
+            setWrappedData(parsedData);
+          } catch (e) {
+            console.error("Failed to load cached wrapped data", e);
+            // If cache is corrupted, fetch fresh data
+            handleSubmit(profile);
+          }
+        } else {
+          // No cached data, fetch fresh
+          handleSubmit(profile);
+        }
       } catch (e) {
         console.error("Failed to load cached profile", e);
       }
@@ -48,7 +74,12 @@ export default function PersonalWrappedPage() {
       const data = await generatePersonalWrapped(profile);
       setWrappedData(data);
       setCachedProfile(profile);
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(profile));
+
+      // Cache both the profile and wrapped data
+      localStorage.setItem(PROFILE_STORAGE_KEY, JSON.stringify(profile));
+      const cacheKey = generateCacheKey(profile);
+      localStorage.setItem(cacheKey, JSON.stringify(data));
+
       setIsEditing(false);
     } catch (err) {
       console.error("Error generating wrapped:", err);
@@ -65,7 +96,14 @@ export default function PersonalWrappedPage() {
   const handleReset = () => {
     setWrappedData(null);
     setError(null);
-    localStorage.removeItem(STORAGE_KEY);
+
+    // Clear both profile and any cached wrapped data
+    localStorage.removeItem(PROFILE_STORAGE_KEY);
+    if (cachedProfile) {
+      const cacheKey = generateCacheKey(cachedProfile);
+      localStorage.removeItem(cacheKey);
+    }
+
     setCachedProfile(null);
     setIsEditing(false);
   };
