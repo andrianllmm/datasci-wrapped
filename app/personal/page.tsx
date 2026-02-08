@@ -26,6 +26,7 @@ export default function PersonalWrappedPage() {
   const [cachedProfile, setCachedProfile] = useState<UserProfileInput | null>(
     null,
   );
+  const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
     const stored = localStorage.getItem(STORAGE_KEY);
@@ -47,7 +48,9 @@ export default function PersonalWrappedPage() {
     try {
       const data = await generatePersonalWrapped(profile);
       setWrappedData(data);
+      setCachedProfile(profile);
       localStorage.setItem(STORAGE_KEY, JSON.stringify(profile));
+      setIsEditing(false);
     } catch (err) {
       console.error("Error generating wrapped:", err);
       setError(
@@ -67,12 +70,73 @@ export default function PersonalWrappedPage() {
     setCachedProfile(null);
   };
 
-  if (isLoading) {
+  if (isLoading && !wrappedData) {
     return <PersonalWrappedLoading />;
   }
 
   if (wrappedData) {
-    return <PersonalWrapped data={wrappedData} />;
+    return (
+      <>
+        <PersonalWrapped 
+          data={wrappedData} 
+          onEdit={() => setIsEditing(true)}
+        />
+        
+        {/* Edit Modal Overlay */}
+        {isEditing && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4"
+            onClick={(e) => {
+              if (e.target === e.currentTarget) {
+                setIsEditing(false);
+              }
+            }}
+          >
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              className="bg-background border border-primary/20 rounded-2xl p-8 max-w-md w-full shadow-2xl"
+            >
+              <div className="mb-6">
+                <h2 className="text-2xl font-bold text-foreground">
+                  Edit Your Details
+                </h2>
+                <p className="text-muted-foreground text-sm mt-2">
+                  Update your username or ID to regenerate your wrapped
+                </p>
+              </div>
+              
+              <UserProfileForm
+                onSubmit={handleSubmit}
+                isLoading={isLoading}
+                initialProfile={cachedProfile}
+              />
+              
+              {error && (
+                <motion.div
+                  {...fadeInUp(0.2)}
+                  className="mt-4 p-3 bg-red-500/20 border border-red-400 rounded-lg"
+                >
+                  <p className="text-red-200 text-sm">{error}</p>
+                </motion.div>
+              )}
+              
+              <Button
+                variant="outline"
+                onClick={() => setIsEditing(false)}
+                className="w-full mt-4"
+              >
+                Cancel
+              </Button>
+            </motion.div>
+          </motion.div>
+        )}
+      </>
+    );
   }
 
   return (
