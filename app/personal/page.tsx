@@ -16,6 +16,12 @@ import BackHomeButton from "@/components/BackHomeButton";
 
 const PROFILE_STORAGE_KEY = "datasci-wrapped-profile";
 const WRAPPED_DATA_STORAGE_KEY = "datasci-wrapped-data";
+const CACHE_TTL_MS = 24 * 60 * 60 * 1000; // 24 hours
+
+interface CachedWrappedData {
+  data: PersonalWrappedData;
+  timestamp: number;
+}
 
 /**
  * Generate a cache key based on the user profile
@@ -23,6 +29,13 @@ const WRAPPED_DATA_STORAGE_KEY = "datasci-wrapped-data";
  */
 const generateCacheKey = (profile: UserProfileInput) => {
   return `${WRAPPED_DATA_STORAGE_KEY}:${profile.githubUsername || ""}:${profile.stackoverflowId || ""}`;
+};
+
+/**
+ * Check if cached data has expired based on TTL
+ */
+const isCacheExpired = (cachedData: CachedWrappedData): boolean => {
+  return Date.now() - cachedData.timestamp > CACHE_TTL_MS;
 };
 
 export default function PersonalWrappedPage() {
@@ -45,12 +58,19 @@ export default function PersonalWrappedPage() {
 
         // Try to load cached wrapped data first
         const cacheKey = generateCacheKey(profile);
-        const cachedData = localStorage.getItem(cacheKey);
+        const cachedDataStr = localStorage.getItem(cacheKey);
 
-        if (cachedData) {
+        if (cachedDataStr) {
           try {
-            const parsedData = JSON.parse(cachedData);
-            setWrappedData(parsedData);
+            const cachedData: CachedWrappedData = JSON.parse(cachedDataStr);
+
+            // Check if cache has expired
+            if (!isCacheExpired(cachedData)) {
+              setWrappedData(cachedData.data);
+            } else {
+              // Cache expired, fetch fresh data
+              handleSubmit(profile);
+            }
           } catch (e) {
             console.error("Failed to load cached wrapped data", e);
             // If cache is corrupted, fetch fresh data
@@ -75,10 +95,14 @@ export default function PersonalWrappedPage() {
       setWrappedData(data);
       setCachedProfile(profile);
 
-      // Cache both the profile and wrapped data
+      // Cache both the profile and wrapped data with timestamp
       localStorage.setItem(PROFILE_STORAGE_KEY, JSON.stringify(profile));
       const cacheKey = generateCacheKey(profile);
-      localStorage.setItem(cacheKey, JSON.stringify(data));
+      const cachedData: CachedWrappedData = {
+        data,
+        timestamp: Date.now(),
+      };
+      localStorage.setItem(cacheKey, JSON.stringify(cachedData));
 
       setIsEditing(false);
     } catch (err) {
@@ -115,7 +139,17 @@ export default function PersonalWrappedPage() {
   if (wrappedData) {
     return (
       <>
-        <PersonalWrapped data={wrappedData} onEdit={() => setIsEditing(true)} />
+        <PersonalWrapped
+          data={wrappedData}
+          onEdit={() => {
+            // Clear cache when entering edit mode to force fresh data on resubmit
+            if (cachedProfile) {
+              const cacheKey = generateCacheKey(cachedProfile);
+              localStorage.removeItem(cacheKey);
+            }
+            setIsEditing(true);
+          }}
+        />
 
         {/* Edit Modal Overlay */}
         {isEditing && (
