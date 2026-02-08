@@ -246,6 +246,10 @@ export default function About() {
             </Button>
 
             <Button asChild variant="outline" size="lg">
+              <Link href="/faq">FAQ</Link>
+            </Button>
+
+            <Button asChild variant="outline" size="lg">
               <a
                 href="https://github.com/andrianllmm/datasci-wrapped"
                 target="_blank"

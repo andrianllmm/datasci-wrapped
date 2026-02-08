@@ -103,6 +103,11 @@ export default function Home() {
                 <span>About</span>
               </Link>
             </Button>
+            <Button asChild variant="link">
+              <Link href="/faq">
+                <span>FAQ</span>
+              </Link>
+            </Button>
           </motion.div>
         </div>
       </Slide>
