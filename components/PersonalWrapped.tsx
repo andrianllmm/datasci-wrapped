@@ -21,13 +21,13 @@ export default function PersonalWrapped({
     <>
       <BackHomeButton />
       <div className="snap-y snap-mandatory h-screen w-screen overflow-y-scroll bg-background">
-        <PersonalIntroSlide data={data} onEdit={onEdit} />
-        <PersonalAchievementsSlide data={data} />
-        <PersonalReposSlide data={data} />
-        <PersonalReputationSlide data={data} />
-        <PersonalToolsSlide data={data} />
-        <PersonalLanguagesSlide data={data} />
-        <PersonalOutroSlide data={data} onEdit={onEdit} />
+        <PersonalIntroSlide data={data} onEdit={onEdit} slideId="intro" />
+        <PersonalAchievementsSlide data={data} slideId="achievements" />
+        <PersonalReposSlide data={data} slideId="repos" />
+        <PersonalReputationSlide data={data} slideId="reputation" />
+        <PersonalToolsSlide data={data} slideId="tools" />
+        <PersonalLanguagesSlide data={data} slideId="languages" />
+        <PersonalOutroSlide data={data} onEdit={onEdit} slideId="outro" />
       </div>
     </>
   );

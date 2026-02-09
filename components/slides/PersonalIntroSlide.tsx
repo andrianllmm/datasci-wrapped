@@ -8,9 +8,11 @@ import { Pencil } from "lucide-react";
 export default function PersonalIntroSlide({
   data,
   onEdit,
+  slideId,
 }: {
   data: PersonalWrappedData;
   onEdit?: () => void;
+  slideId?: string;
 }) {
   const userName =
     data.userMetadata?.name || data.userMetadata?.username || "there";
@@ -18,7 +20,7 @@ export default function PersonalIntroSlide({
     data.userMetadata?.name || data.userMetadata?.username;
 
   return (
-    <Slide>
+    <Slide slideId={slideId}>
       {/* Edit Button */}
       {onEdit && (
         <motion.div
