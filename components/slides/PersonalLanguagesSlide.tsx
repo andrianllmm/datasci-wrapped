@@ -6,11 +6,13 @@ import { PersonalWrappedData } from "@/types/wrapped";
 
 export default function PersonalLanguagesSlide({
   data,
+  slideId,
 }: {
   data: PersonalWrappedData;
+  slideId?: string;
 }) {
   return (
-    <Slide>
+    <Slide slideId={slideId}>
       <div className="w-full h-full flex flex-col items-center justify-center">
         <ScrollAnimate animation={() => fadeInUp()}>
           <h1 className="text-center text-2xl md:text-5xl sm:text-4xl font-black text-foreground mb-4 flex flex-wrap justify-center items-center gap-3">

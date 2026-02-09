@@ -7,8 +7,10 @@ import { PersonalWrappedData } from "@/types/wrapped";
 
 export default function PersonalReposSlide({
   data,
+  slideId,
 }: {
   data: PersonalWrappedData;
+  slideId?: string;
 }) {
   const totalRepos = data.repo.reduce((sum, d) => sum + d.count, 0);
   const currentYearData = data.repo.filter((d) =>
@@ -17,7 +19,7 @@ export default function PersonalReposSlide({
   const currentYearRepos = currentYearData.reduce((sum, d) => sum + d.count, 0);
 
   return (
-    <Slide>
+    <Slide slideId={slideId}>
       <div className="w-full h-full flex flex-col items-center justify-center">
         <ScrollAnimate animation={() => fadeInUp()}>
           <h1 className="flex flex-col gap-1 text-center text-3xl md:text-6xl sm:text-5xl font-black text-foreground mb-4">

@@ -7,8 +7,10 @@ import { PersonalWrappedData } from "@/types/wrapped";
 
 export default function PersonalReputationSlide({
   data,
+  slideId,
 }: {
   data: PersonalWrappedData;
+  slideId?: string;
 }) {
   // Get the most recent reputation value
   const currentReputation =
@@ -16,7 +18,7 @@ export default function PersonalReputationSlide({
 
   if (currentReputation === 0) {
     return (
-      <Slide>
+      <Slide slideId={slideId}>
         <div className="w-full h-full flex flex-col items-center justify-center px-6">
           <ScrollAnimate animation={() => fadeInUp()}>
             <h1 className="text-center text-3xl md:text-5xl font-black text-foreground mb-8">
@@ -34,7 +36,7 @@ export default function PersonalReputationSlide({
   }
 
   return (
-    <Slide>
+    <Slide slideId={slideId}>
       <div className="w-full h-full flex flex-col items-center justify-center">
         <ScrollAnimate animation={() => fadeInUp()}>
           <h1 className="flex flex-col gap-1 text-center text-3xl md:text-6xl sm:text-5xl font-black text-foreground mb-4">

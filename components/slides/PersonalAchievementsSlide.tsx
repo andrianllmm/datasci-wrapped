@@ -7,13 +7,15 @@ import { PersonalWrappedData } from "@/types/wrapped";
 
 export default function PersonalAchievementsSlide({
   data,
+  slideId,
 }: {
   data: PersonalWrappedData;
+  slideId?: string;
 }) {
   const topStat = data.achievements.sort((a, b) => b.value - a.value)[0];
 
   return (
-    <Slide>
+    <Slide slideId={slideId}>
       <div className="w-full h-full flex flex-col items-center justify-center">
         <ScrollAnimate animation={() => fadeInUp()}>
           <h1 className="text-center text-3xl md:text-6xl sm:text-5xl font-black text-foreground mb-2">
