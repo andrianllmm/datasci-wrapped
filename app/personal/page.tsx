@@ -10,6 +10,13 @@ import PersonalWrappedLoading from "@/components/PersonalWrappedLoading";
 import { generatePersonalWrapped } from "@/lib/api/transform";
 import { PersonalWrappedData } from "@/types/wrapped";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { motion } from "motion/react";
 import { fadeInUp } from "@/lib/animations";
 import BackHomeButton from "@/components/BackHomeButton";
@@ -197,67 +204,49 @@ export default function PersonalWrappedPage() {
           }}
         />
 
-        {/* Edit Modal Overlay */}
-        {isEditing && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4"
-            onClick={(e) => {
-              if (e.target === e.currentTarget) {
-                setIsEditing(false);
-              }
-            }}
-          >
-            <motion.div
-              initial={{ scale: 0.95, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.95, opacity: 0 }}
-              className="bg-background border border-primary/20 rounded-2xl p-8 max-w-md w-full shadow-2xl"
-            >
-              <div className="mb-8">
-                <h2 className="text-2xl font-bold text-foreground">
-                  Edit Your Details
-                </h2>
-                <p className="text-muted-foreground text-sm mt-2">
-                  Update your username or ID to regenerate your wrapped
+        <Dialog open={isEditing} onOpenChange={setIsEditing}>
+          <DialogContent className="rounded-2xl border border-primary/20 p-8 shadow-2xl">
+            <DialogHeader className="mb-2">
+              <DialogTitle className="text-2xl font-bold text-foreground">
+                Edit Your Details
+              </DialogTitle>
+              <DialogDescription className="text-muted-foreground text-sm mt-2">
+                Update your username or ID to regenerate your wrapped
+              </DialogDescription>
+            </DialogHeader>
+
+            {error && (
+              <motion.div {...fadeInUp(0.2)} className="mb-6">
+                <p className="text-destructive text-sm text-center">
+                  {error}
                 </p>
-              </div>
+              </motion.div>
+            )}
 
-              {error && (
-                <motion.div {...fadeInUp(0.2)} className="mb-6">
-                  <p className="text-destructive text-sm text-center">
-                    {error}
-                  </p>
-                </motion.div>
-              )}
+            <UserProfileForm
+              onSubmit={handleSubmit}
+              isLoading={isLoading}
+              initialProfile={cachedProfile}
+            />
 
-              <UserProfileForm
-                onSubmit={handleSubmit}
-                isLoading={isLoading}
-                initialProfile={cachedProfile}
-              />
-
-              <div className="flex flex-col gap-2 mt-8">
-                <Button
-                  variant="outline"
-                  onClick={() => setIsEditing(false)}
-                  className="w-full rounded-xl"
-                >
-                  Cancel
-                </Button>
-                <Button
-                  variant="destructive"
-                  onClick={handleReset}
-                  className="w-full rounded-xl"
-                >
-                  Clear Details
-                </Button>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
+            <div className="flex flex-col gap-2 mt-8">
+              <Button
+                variant="outline"
+                onClick={() => setIsEditing(false)}
+                className="w-full rounded-xl"
+              >
+                Cancel
+              </Button>
+              <Button
+                variant="destructive"
+                onClick={handleReset}
+                className="w-full rounded-xl"
+              >
+                Clear Details
+              </Button>
+            </div>
+          </DialogContent>
+        </Dialog>
       </>
     );
   }
