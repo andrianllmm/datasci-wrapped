@@ -12,10 +12,11 @@ export default function IntroSlide({ data }: { data: WrappedData }) {
         <div className="text-center">
           <motion.h1
             {...fadeInDown()}
-            className="text-3xl sm:text-4xl md:text-6xl font-black text-foreground flex items-center justify-center gap-1"
+            className="text-3xl sm:text-4xl md:text-6xl font-black text-foreground
+             flex flex-wrap items-center justify-center gap-1 text-center"
           >
-            <UpdssocLogo className="inline-block size-8 sm:size-12 md:size-16" />
-            DataSci Wrapped
+            <UpdssocLogo className="size-8 sm:size-12 md:size-16" />
+            <span>DataSci Wrapped</span>
           </motion.h1>
           <motion.h2
             {...fadeInUp(0.2)}

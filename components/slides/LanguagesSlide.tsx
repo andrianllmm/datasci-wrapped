@@ -21,10 +21,8 @@ export default function LanguagesSlide({ data }: { data: WrappedData }) {
         </ScrollAnimate>
         <LanguagesChart data={data.languages} />
         <ScrollAnimate animation={() => fadeInUp(0.2)}>
-          <h1 className="text-center text-2xl md:text-3xl font-bold text-primary mb-4">
+          <h1 className="text-center text-xl sm:text-2xl md:text-3xl font-bold text-primary mb-4">
             In job postings, Python is the most used programming language
-            <br />
-            followed by SQL and R
           </h1>
         </ScrollAnimate>
       </div>

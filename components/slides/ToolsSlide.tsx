@@ -17,10 +17,8 @@ export default function ToolsSlide({ data }: { data: WrappedData }) {
         </ScrollAnimate>
         <ToolsChart data={data.tools} />
         <ScrollAnimate animation={() => fadeInUp(0.2)}>
-          <h1 className="text-center text-2xl md:text-3xl font-bold text-primary mb-4">
-            Pandas was the most used tool with 77% adoption,
-            <br />
-            and NumPy followed at 72%.
+          <h1 className="text-center text-xl sm:text-2xl md:text-3xl font-bold text-primary mb-4">
+            Pandas was the most used tool with 77% adoption. at 72%.
           </h1>
         </ScrollAnimate>
       </div>

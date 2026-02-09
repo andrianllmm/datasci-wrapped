@@ -11,10 +11,10 @@ export default function DiscussionsContent() {
       <Slide scrollable>
         <div className="flex flex-col gap-4 max-w-4xl mx-auto px-6">
           <div>
-            <h1 className="text-center text-2xl md:text-4xl sm:text-3xl font-black text-foreground mb-2">
+            <h1 className="text-center text-2xl sm:text-3xl md:text-4xl  font-black text-foreground mb-2">
               DataSci Wrapped Discussions
             </h1>
-            <p className="text-center text-foreground/70 text-lg">
+            <p className="text-center text-foreground/70 text-sm sm:text-base md:text-lg">
               Share your thoughts, ask questions, and discuss anything related
               to DataSci Wrapped
             </p>

@@ -216,7 +216,7 @@ export default function PersonalWrappedPage() {
               exit={{ scale: 0.95, opacity: 0 }}
               className="bg-background border border-primary/20 rounded-2xl p-8 max-w-md w-full shadow-2xl"
             >
-              <div className="mb-6">
+              <div className="mb-8">
                 <h2 className="text-2xl font-bold text-foreground">
                   Edit Your Details
                 </h2>
@@ -225,33 +225,32 @@ export default function PersonalWrappedPage() {
                 </p>
               </div>
 
+              {error && (
+                <motion.div {...fadeInUp(0.2)} className="mb-6">
+                  <p className="text-destructive text-sm text-center">
+                    {error}
+                  </p>
+                </motion.div>
+              )}
+
               <UserProfileForm
                 onSubmit={handleSubmit}
                 isLoading={isLoading}
                 initialProfile={cachedProfile}
               />
 
-              {error && (
-                <motion.div
-                  {...fadeInUp(0.2)}
-                  className="mt-4 p-3 bg-red-500/20 border border-red-400 rounded-lg"
-                >
-                  <p className="text-red-200 text-sm">{error}</p>
-                </motion.div>
-              )}
-
-              <div className="flex flex-col gap-2 mt-4">
+              <div className="flex flex-col gap-2 mt-8">
                 <Button
                   variant="outline"
                   onClick={() => setIsEditing(false)}
-                  className="w-full"
+                  className="w-full rounded-xl"
                 >
                   Cancel
                 </Button>
                 <Button
-                  variant="outline"
+                  variant="destructive"
                   onClick={handleReset}
-                  className="w-full border-red-400/50 text-red-400 hover:bg-red-500/10 hover:text-red-300 hover:border-red-400"
+                  className="w-full rounded-xl"
                 >
                   Clear Details
                 </Button>
@@ -277,21 +276,24 @@ export default function PersonalWrappedPage() {
             Year in Data Science
           </motion.h2>
 
-          <UserProfileForm
-            onSubmit={handleSubmit}
-            isLoading={isLoading}
-            initialProfile={cachedProfile}
-          />
+          <div className="w-full max-w-md mx-auto px-6">
+            <UserProfileForm
+              onSubmit={handleSubmit}
+              isLoading={isLoading}
+              initialProfile={cachedProfile}
+            />
+          </div>
 
           {error && (
-            <motion.div
-              {...fadeInUp(0.4)}
-              className="mt-6 p-4 bg-red-500/20 border-2 border-red-400 rounded-lg max-w-md"
-            >
-              <p className="text-red-200 text-center font-semibold">{error}</p>
+            <motion.div {...fadeInUp(0.4)} className="mt-4 p-2 max-w-md">
+              <p className="text-destructive text-center font-semibold">
+                error
+              </p>
               <Button
                 onClick={handleReset}
-                className="mt-4 w-full bg-red-600 hover:bg-red-500"
+                variant="destructive"
+                size="sm"
+                className="mt-2"
               >
                 Try Again
               </Button>
