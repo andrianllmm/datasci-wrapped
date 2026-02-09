@@ -3,7 +3,7 @@
 import Slide from "@/components/Slide";
 import { Button } from "@/components/ui/button";
 import { catalog } from "@/data/catalog";
-import { fadeInDown, fadeInUp, slideInLeft } from "@/lib/animations";
+import { fadeInDown, fadeInUp } from "@/lib/animations";
 import { SiGithub } from "@icons-pack/react-simple-icons";
 import {
   CircleQuestionMarkIcon,

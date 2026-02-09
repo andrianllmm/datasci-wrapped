@@ -1,12 +1,46 @@
-# DataSci Wrapped
+<p align="center">
+  <a href="https://github.com/andrianllmm/datasci-wrapped">
+    <img src="https://img.shields.io/github/stars/andrianllmm/datasci-wrapped?style=for-the-badge&color=a766fe" alt="GitHub stars" />
+  </a>
+  <a href="https://github.com/andrianllmm/datasci-wrapped/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/andrianllmm/datasci-wrapped?style=for-the-badge&color=a766fe" alt="License" />
+  </a>
+  <a href="https://datasci-wrapped.vercel.app">
+    <img src="https://img.shields.io/badge/Live-Demo?style=for-the-badge&color=a766fe" alt="Live demo" />
+  </a>
+</p>
 
-An application showing data science trends and statistics in a year-by-year "wrapped" format.
+<div align="center">
+  <a href="https://github.com/andrianllmm/datasci-wrapped">
+    <img src="docs/images/updssoc-logo.png" alt="Logo" width="80" height="80">
+  </a>
+
+<h3 align="center">DataSci Wrapped</h3>
+
+  <p align="center">
+    Data science trends and statistics in a year-by-year "wrapped" format.
+    <br />
+    <br />
+    <a href="https://datasci-wrapped.vercel.app"><strong>Try Now</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/andrianllmm/datasci-wrapped/blob/main/README.md">Docs</a>
+    &middot;
+    <a href="https://github.com/andrianllmm/datasci-wrapped/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
+    &middot;
+    <a href="https://github.com/andrianllmm/datasci-wrapped/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
+  </p>
+
+</div>
 
 ## About
 
-Visualizes data science metrics and trends in two modes:
+DataSci Wrapped is a web app showing data science trends and statistics in a year-by-year "wrapped" format.
+It visualizes data science metrics and trends in two modes:
 
 ### Industry Wrapped
+
+View industry trends and statistics for the past year.
 
 - Global data volume growth
 - Data science platform market size
@@ -18,22 +52,19 @@ Visualizes data science metrics and trends in two modes:
 
 Generate a personalized summary using public GitHub and StackOverflow APIs.
 
-Includes:
-
+- Overall achievements (stars, followers, badges)
+- Repository activity timeline
+- StackOverflow reputation timeline
+- Tools technologies used
 - Programming language breakdown
-- Tools and technologies used
-- Project activity timeline
-- GitHub stats (repos, stars, followers)
-- StackOverflow reputation and badges
 
 ### Features
 
 - Year-based navigation
-- Personal wrapped generation from public profiles
+- Personal Wrapped generation from public profiles from GitHub and StackOverflow APIs
 - Responsive charts and visualizations
-- Animated transitions and scroll-based animations
-- Custom cursor
-- Real-time data fetching from GitHub and StackOverflow APIs
+- Community Discussions with Giscus comments
+- Save Wrapped as images for sharing
 
 ## Development
 
@@ -70,13 +101,7 @@ Open [http://localhost:3000](http://localhost:3000) to view the application.
 
 ## Contributing
 
-Contributions are welcome! To get started:
-
-1. Fork the project
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a pull request
+Contributions are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for more details.
 
 ## Issues
 

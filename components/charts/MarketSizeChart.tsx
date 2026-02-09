@@ -15,7 +15,13 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { MarketSizeEntry } from "@/types/wrapped";
 
-export default function MarketSizeChart({ data }: { data: MarketSizeEntry[] }) {
+export default function MarketSizeChart({
+  data,
+  year,
+}: {
+  data: MarketSizeEntry[];
+  year: number;
+}) {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.3 });
   const [animate, setAnimate] = useState(false);
 
@@ -79,7 +85,7 @@ export default function MarketSizeChart({ data }: { data: MarketSizeEntry[] }) {
                   key={`cell-${index}`}
                   className="hover-target"
                   fill={
-                    entry.year === new Date().getFullYear()
+                    entry.year === year
                       ? "var(--color-chart-2)"
                       : "var(--color-chart-4)"
                   }

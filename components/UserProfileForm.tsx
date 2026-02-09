@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Button } from "./ui/button";
 import { motion } from "motion/react";
-import { fadeInUp, slideInLeft } from "@/lib/animations";
+import { fadeInUp } from "@/lib/animations";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { LockOpen, StarsIcon } from "lucide-react";

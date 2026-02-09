@@ -20,9 +20,9 @@ export default function DataVolumeSlide({ data }: { data: WrappedData }) {
             />
           </h1>
         </ScrollAnimate>
-        <DataVolumeChart data={data.dataVolume} />
+        <DataVolumeChart data={data.dataVolume} year={data.year} />
         <ScrollAnimate animation={() => fadeInUp(0.2)}>
-          <h1 className="text-center text-xl sm:text-2xl md:text-3xl font-bold text-primary mb-4">
+          <h1 className="text-center text-xl sm:text-2xl md:text-3xl font-bold text-primary mb-4 max-w-xl">
             ...and we transformed this mountain into actionable insights
           </h1>
         </ScrollAnimate>

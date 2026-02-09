@@ -21,9 +21,9 @@ export default function MarketSizeSlide({ data }: { data: WrappedData }) {
             />
           </h1>
         </ScrollAnimate>
-        <MarketSizeChart data={data.marketSize} />
+        <MarketSizeChart data={data.marketSize} year={data.year} />
         <ScrollAnimate animation={() => fadeInUp(0.2)}>
-          <h1 className="text-center text-xl sm:text-2xl md:text-3xl font-bold text-primary mb-4">
+          <h1 className="text-center text-xl sm:text-2xl md:text-3xl font-bold text-primary mb-4 max-w-2xl">
             The market is set to reach USD{" "}
             <span className="font-black text-primary">1,826.9B</span> by 2033,
             growing at a <span className="font-black text-primary">28.8%</span>{" "}
