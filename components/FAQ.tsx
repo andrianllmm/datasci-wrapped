@@ -45,7 +45,7 @@ export default function FAQ() {
   ];
 
   return (
-    <>
+    <div className="snap-y snap-mandatory h-screen w-screen overflow-y-scroll bg-background">
       <BackHomeButton />
 
       {/* Hero Section */}
@@ -138,6 +138,6 @@ export default function FAQ() {
           </motion.div>
         </motion.div>
       </Slide>
-    </>
+    </div>
   );
 }
