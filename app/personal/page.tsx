@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Slide from "@/components/Slide";
 import UserProfileForm, {
   UserProfileInput,
@@ -74,6 +74,59 @@ export default function PersonalWrappedPage() {
   );
   const [isEditing, setIsEditing] = useState(false);
 
+  const handleSubmit = useCallback(
+    async (profile: UserProfileInput) => {
+      setIsLoading(true);
+      setError(null);
+
+      try {
+        // If profile changed, clear old cache
+        if (cachedProfile) {
+          const oldCacheKey = generateCacheKey(cachedProfile);
+          const newCacheKey = generateCacheKey(profile);
+          if (oldCacheKey !== newCacheKey) {
+            localStorage.removeItem(oldCacheKey);
+          }
+        }
+
+        const data = await generatePersonalWrapped(profile);
+
+        // Validate that we got proper data
+        if (
+          !data ||
+          !Array.isArray(data.repo) ||
+          !Array.isArray(data.reputation)
+        ) {
+          throw new Error("Received invalid data structure from API");
+        }
+
+        setWrappedData(data);
+        setCachedProfile(profile);
+
+        // Cache both the profile and wrapped data with timestamp
+        localStorage.setItem(PROFILE_STORAGE_KEY, JSON.stringify(profile));
+        const cacheKey = generateCacheKey(profile);
+        const cachedData: CachedWrappedData = {
+          data,
+          timestamp: Date.now(),
+        };
+        localStorage.setItem(cacheKey, JSON.stringify(cachedData));
+
+        setIsEditing(false);
+      } catch (err) {
+        console.error("Error generating wrapped:", err);
+        setError(
+          err instanceof Error
+            ? err.message
+            : "Failed to generate your wrapped. Please check your usernames and try again.",
+        );
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [cachedProfile],
+  );
+
   useEffect(() => {
     const stored = localStorage.getItem(PROFILE_STORAGE_KEY);
     if (stored) {
@@ -118,57 +171,7 @@ export default function PersonalWrappedPage() {
         console.error("Failed to load cached profile", e);
       }
     }
-  }, []);
-
-  const handleSubmit = async (profile: UserProfileInput) => {
-    setIsLoading(true);
-    setError(null);
-
-    try {
-      // If profile changed, clear old cache
-      if (cachedProfile) {
-        const oldCacheKey = generateCacheKey(cachedProfile);
-        const newCacheKey = generateCacheKey(profile);
-        if (oldCacheKey !== newCacheKey) {
-          localStorage.removeItem(oldCacheKey);
-        }
-      }
-
-      const data = await generatePersonalWrapped(profile);
-
-      // Validate that we got proper data
-      if (
-        !data ||
-        !Array.isArray(data.repo) ||
-        !Array.isArray(data.reputation)
-      ) {
-        throw new Error("Received invalid data structure from API");
-      }
-
-      setWrappedData(data);
-      setCachedProfile(profile);
-
-      // Cache both the profile and wrapped data with timestamp
-      localStorage.setItem(PROFILE_STORAGE_KEY, JSON.stringify(profile));
-      const cacheKey = generateCacheKey(profile);
-      const cachedData: CachedWrappedData = {
-        data,
-        timestamp: Date.now(),
-      };
-      localStorage.setItem(cacheKey, JSON.stringify(cachedData));
-
-      setIsEditing(false);
-    } catch (err) {
-      console.error("Error generating wrapped:", err);
-      setError(
-        err instanceof Error
-          ? err.message
-          : "Failed to generate your wrapped. Please check your usernames and try again.",
-      );
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  }, [handleSubmit]);
 
   const handleReset = () => {
     // Clear both profile and any cached wrapped data
@@ -217,9 +220,7 @@ export default function PersonalWrappedPage() {
 
             {error && (
               <motion.div {...fadeInUp(0.2)} className="mb-6">
-                <p className="text-destructive text-sm text-center">
-                  {error}
-                </p>
+                <p className="text-destructive text-sm text-center">{error}</p>
               </motion.div>
             )}
 
