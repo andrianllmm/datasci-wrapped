@@ -21,10 +21,9 @@ export function AboutCtaSlide() {
 
         <motion.p
           {...fadeInDown(0.1)}
-          className="text-lg text-muted-foreground mb-8"
+          className="text-lg text-center text-muted-foreground mb-8"
         >
-          Start exploring trends and create your personalized wrapped summary
-          today.
+          Start exploring trends and create your personalized wrapped today.
         </motion.p>
 
         <motion.div

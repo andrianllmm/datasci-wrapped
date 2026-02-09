@@ -24,19 +24,19 @@ export const ABOUT_FEATURES: Feature[] = [
     icon: Sparkles,
     title: "Personalized Wrapped",
     description:
-      "Connect your profiles to generate a personalized summary of your journey.",
+      "Connect your profiles to generate a personalized summary of your journey",
   },
   {
     icon: Users,
-    title: "Community Focused",
+    title: "Community Discussions",
     description:
-      "Discover how your skills compare to industry trends and celebrate your achievements.",
+      "Discuss with fellow contributors and industry experts to learn from their experiences",
   },
   {
     icon: BarChart2Icon,
     title: "Interactive Charts",
     description:
-      "Engaging visualizations that bring data to life, revealing trends and insights.",
+      "Engaging visualizations that bring data to life, revealing trends and insights",
   },
 ];
 
@@ -51,7 +51,7 @@ export const ABOUT_HOW_IT_WORKS: HowItWorksItem[] = [
     step: "02",
     title: "Connect Your Profiles",
     description:
-      "Create a personalized wrapped by authenticating with GitHub and StackOverflow. We analyze your public repositories, contributions, and more.",
+      "Create a personalized wrapped by authenticating with GitHub and StackOverflow. We analyze your public repositories, contributions, and more!",
   },
   {
     step: "03",

@@ -29,8 +29,8 @@ export function AboutHeroSlide() {
           className="text-lg md:text-xl text-muted-foreground mb-8 text-center"
         >
           A data-driven web application inspired by{" "}
-          <span className="underline">Spotify Wrapped</span> to visualizing data
-          science industry trends and celebrating your personal contributions.
+          <span className="underline">Spotify Wrapped</span> to visualize data
+          science industry trends and celebrate your personal contributions.
         </motion.p>
 
         <motion.div
