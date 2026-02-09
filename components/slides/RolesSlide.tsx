@@ -23,7 +23,7 @@ export default function RolesSlide({ data }: { data: WrappedData }) {
         </ScrollAnimate>
         <RolesChart data={data.roles} />
         <ScrollAnimate animation={() => fadeInUp(0.2)}>
-          <h1 className="text-center text-xl sm:text-2xl md:text-3xl font-bold text-primary mb-4">
+          <h1 className="text-center text-xl sm:text-2xl md:text-3xl font-bold text-primary mb-4 max-w-2xl">
             The industry offers a wide range of roles, from analytical thinkers
             to technical engineers.
           </h1>
