@@ -2,12 +2,6 @@
   <a href="https://github.com/andrianllmm/datasci-wrapped">
     <img src="https://img.shields.io/github/stars/andrianllmm/datasci-wrapped?style=for-the-badge&color=a766fe" alt="GitHub stars" />
   </a>
-  <a href="https://github.com/andrianllmm/datasci-wrapped/network/members">
-    <img src="https://img.shields.io/github/forks/andrianllmm/datasci-wrapped?style=for-the-badge&color=a766fe" alt="GitHub forks" />
-  </a>
-  <a href="https://github.com/andrianllmm/datasci-wrapped/issues">
-    <img src="https://img.shields.io/github/issues/andrianllmm/datasci-wrapped?style=for-the-badge&color=a766fe" alt="GitHub issues" />
-  </a>
   <a href="https://github.com/andrianllmm/datasci-wrapped/blob/main/LICENSE">
     <img src="https://img.shields.io/github/license/andrianllmm/datasci-wrapped?style=for-the-badge&color=a766fe" alt="License" />
   </a>
@@ -46,7 +40,7 @@ It visualizes data science metrics and trends in two modes:
 
 ### Industry Wrapped
 
-View industry trends and statistics for the past year. Includes:
+View industry trends and statistics for the past year.
 
 - Global data volume growth
 - Data science platform market size
@@ -56,11 +50,11 @@ View industry trends and statistics for the past year. Includes:
 
 ### Personal Wrapped
 
-Generate a personalized summary using public GitHub and StackOverflow APIs. Includes:
+Generate a personalized summary using public GitHub and StackOverflow APIs.
 
-- Overall achievements (repos, stars, followers)
+- Overall achievements (stars, followers, badges)
 - Repository activity timeline
-- StackOverflow reputation and badges
+- StackOverflow reputation timeline
 - Tools technologies used
 - Programming language breakdown
 
