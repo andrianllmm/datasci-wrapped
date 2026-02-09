@@ -32,12 +32,12 @@ export async function exportSlidesAsZip(
           windowWidth: element.scrollWidth || element.clientWidth,
         });
 
-        const blob = await new Promise<Blob>((resolve) => {
+        const blob = await new Promise<Blob>((resolve, reject) => {
           canvas.toBlob((blob) => {
             if (blob) {
               resolve(blob);
             } else {
-              throw new Error("Failed to create blob from canvas");
+              reject(new Error("Failed to create blob from canvas"));
             }
           }, "image/png");
         });
@@ -67,12 +67,16 @@ export async function exportSlidesAsZip(
     // Generate and download the zip file
     const zipBlob = await zip.generateAsync({ type: "blob" });
     const link = document.createElement("a");
-    link.href = URL.createObjectURL(zipBlob);
-    link.download = `${userName}-wrapped-${new Date().getFullYear()}.zip`;
+    const objectUrl = URL.createObjectURL(zipBlob);
+    link.href = objectUrl;
+    const safeUserName = userName.replace(/[^a-zA-Z0-9_-]/g, "-");
+    link.download = `${safeUserName}-wrapped-${new Date().getFullYear()}.zip`;
     link.click();
-    URL.revokeObjectURL(link.href);
+    setTimeout(() => URL.revokeObjectURL(objectUrl), 0);
   } catch (error) {
-    console.error("Error exporting slides:", error);
-    alert("Failed to export slides. Please try again.");
+    if (error instanceof Error) {
+      throw error;
+    }
+    throw new Error("Error exporting slides");
   }
 }
