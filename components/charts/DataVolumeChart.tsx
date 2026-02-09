@@ -15,7 +15,13 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { DataVolumeEntry } from "@/types/wrapped";
 
-export default function DataVolumeChart({ data }: { data: DataVolumeEntry[] }) {
+export default function DataVolumeChart({
+  data,
+  year,
+}: {
+  data: DataVolumeEntry[];
+  year: number;
+}) {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.3 });
   const [animate, setAnimate] = useState(false);
 
@@ -78,7 +84,7 @@ export default function DataVolumeChart({ data }: { data: DataVolumeEntry[] }) {
                   key={`cell-${index}`}
                   className="hover-target"
                   fill={
-                    entry.year === new Date().getFullYear()
+                    entry.year === year
                       ? "var(--color-chart-2)"
                       : "var(--color-chart-4)"
                   }

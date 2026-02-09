@@ -21,7 +21,7 @@ export default function MarketSizeSlide({ data }: { data: WrappedData }) {
             />
           </h1>
         </ScrollAnimate>
-        <MarketSizeChart data={data.marketSize} />
+        <MarketSizeChart data={data.marketSize} year={data.year} />
         <ScrollAnimate animation={() => fadeInUp(0.2)}>
           <h1 className="text-center text-xl sm:text-2xl md:text-3xl font-bold text-primary mb-4">
             The market is set to reach USD{" "}
