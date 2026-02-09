@@ -12,7 +12,8 @@ import {
   AccordionTrigger,
   AccordionContent,
 } from "@/components/ui/accordion";
-import { HelpCircle } from "lucide-react";
+import { HelpCircle, InfoIcon } from "lucide-react";
+import { SiGithub } from "@icons-pack/react-simple-icons";
 
 export default function FAQ() {
   const faqs = [
@@ -97,7 +98,7 @@ export default function FAQ() {
         <motion.div className="max-w-2xl mx-auto px-4 text-center">
           <motion.h2
             {...fadeInDown()}
-            className="text-3xl md:text-5xl font-black text-foreground mb-6"
+            className="text-3xl sm:text-4xl md:text-5xl font-black text-foreground mb-6"
           >
             Ready to Explore?
           </motion.h2>
@@ -106,22 +107,33 @@ export default function FAQ() {
             {...fadeInUp(0.1)}
             className="text-lg text-muted-foreground mb-8"
           >
-            Still have questions? Feel free to explore our application or check
-            out the GitHub repository.
+            Still have questions? Feel free to explore our application.
           </motion.p>
 
           <motion.div
             {...fadeInUp(0.2)}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+            className="flex flex-wrap gap-3 justify-center items-center"
           >
-            <Button asChild size="lg">
+            <Button asChild variant="outline" size="sm">
               <Link href="/">Back to Home</Link>
             </Button>
 
-            <Button asChild variant="outline" size="lg">
-              <Link href="/about" className="flex gap-2 items-center">
+            <Button asChild variant="outline" size="sm">
+              <Link href="/about">
+                <InfoIcon />
                 Learn More About Us
               </Link>
+            </Button>
+
+            <Button asChild variant="outline" size="sm">
+              <a
+                href="https://github.com/andrianllmm/datasci-wrapped"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex gap-2 items-center"
+              >
+                <SiGithub /> GitHub
+              </a>
             </Button>
           </motion.div>
         </motion.div>

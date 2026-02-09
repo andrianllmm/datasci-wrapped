@@ -13,7 +13,11 @@ interface GiscusCommentsProps {
 export default function GiscusComments({ term, title }: GiscusCommentsProps) {
   return (
     <div className="my-8">
-      {title && <h2 className="text-2xl font-bold mb-4">{title}</h2>}
+      {title && (
+        <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center">
+          {title}
+        </h2>
+      )}
       <Giscus
         id="comments"
         repo="andrianllmm/datasci-wrapped"

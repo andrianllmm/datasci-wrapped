@@ -17,7 +17,7 @@ export default function PersonalWrappedLoading() {
         </motion.div>
 
         <motion.div {...fadeInUp(0.2)} className="space-y-4">
-          <div className="bg-muted/50 rounded-lg p-4 space-y-3">
+          <div className="bg-muted/30 rounded-lg p-4 space-y-3">
             <div className="flex items-center space-x-3">
               <div className="animate-pulse bg-primary rounded-full h-3 w-3"></div>
               <p className="text-muted-foreground">
