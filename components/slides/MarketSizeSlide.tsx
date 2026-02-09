@@ -27,7 +27,7 @@ export default function MarketSizeSlide({ data }: { data: WrappedData }) {
             The market is set to reach USD{" "}
             <span className="font-black text-primary">1,826.9B</span> by 2033,
             growing at a <span className="font-black text-primary">28.8%</span>{" "}
-            CAGR from 2024.
+            CAGR from 2024
           </h1>
         </ScrollAnimate>
       </div>
