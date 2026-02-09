@@ -38,53 +38,50 @@ export const usePersonalWrappedData = (): UsePersonalWrappedDataReturn => {
   );
   const [isEditing, setIsEditing] = useState(false);
 
-  const handleSubmit = useCallback(
-    async (profile: UserProfileInput) => {
-      setIsLoading(true);
-      setError(null);
+  const handleSubmit = useCallback(async (profile: UserProfileInput) => {
+    setIsLoading(true);
+    setError(null);
 
-      try {
-        // If profile changed, clear old cache
-        if (cachedProfile) {
-          const oldCacheKey = generateCacheKey(cachedProfile);
-          const newCacheKey = generateCacheKey(profile);
-          if (oldCacheKey !== newCacheKey) {
-            clearProfileCache(cachedProfile);
-          }
+    try {
+      // If profile changed, clear old cache
+      if (cachedProfile) {
+        const oldCacheKey = generateCacheKey(cachedProfile);
+        const newCacheKey = generateCacheKey(profile);
+        if (oldCacheKey !== newCacheKey) {
+          clearProfileCache(cachedProfile);
         }
-
-        const data = await generatePersonalWrapped(profile);
-
-        // Validate that we got proper data
-        if (
-          !data ||
-          !Array.isArray(data.repo) ||
-          !Array.isArray(data.reputation)
-        ) {
-          throw new Error("Received invalid data structure from API");
-        }
-
-        setWrappedData(data);
-        setCachedProfile(profile);
-
-        // Cache both the profile and wrapped data with timestamp
-        saveProfile(profile);
-        saveCachedWrappedData(profile, data);
-
-        setIsEditing(false);
-      } catch (err) {
-        console.error("Error generating wrapped:", err);
-        setError(
-          err instanceof Error
-            ? err.message
-            : "Failed to generate your wrapped. Please check your usernames and try again.",
-        );
-      } finally {
-        setIsLoading(false);
       }
-    },
-    [cachedProfile],
-  );
+
+      const data = await generatePersonalWrapped(profile);
+
+      // Validate that we got proper data
+      if (
+        !data ||
+        !Array.isArray(data.repo) ||
+        !Array.isArray(data.reputation)
+      ) {
+        throw new Error("Received invalid data structure from API");
+      }
+
+      setWrappedData(data);
+      setCachedProfile(profile);
+
+      // Cache both the profile and wrapped data with timestamp
+      saveProfile(profile);
+      saveCachedWrappedData(profile, data);
+
+      setIsEditing(false);
+    } catch (err) {
+      console.error("Error generating wrapped:", err);
+      setError(
+        err instanceof Error
+          ? err.message
+          : "Failed to generate your wrapped. Please check your usernames and try again.",
+      );
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
 
   const handleReset = useCallback(() => {
     clearAllWrappedData(cachedProfile);
@@ -92,7 +89,7 @@ export const usePersonalWrappedData = (): UsePersonalWrappedDataReturn => {
     setError(null);
     setCachedProfile(null);
     setIsEditing(false);
-  }, [cachedProfile]);
+  }, []);
 
   // Initialize with cached data on mount
   useEffect(() => {
