@@ -7,6 +7,12 @@ type PageProps = {
   params: Promise<{ year: string }>;
 };
 
+export function generateStaticParams() {
+  return Object.entries(catalog)
+    .filter(([, data]) => data !== null)
+    .map(([year]) => ({ year }));
+}
+
 export default async function Page({ params }: PageProps) {
   const { year } = await params;
   const yearNum = Number(year);
