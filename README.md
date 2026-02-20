@@ -1,19 +1,12 @@
-<p align="center">
-  <a href="https://github.com/andrianllmm/datasci-wrapped">
-    <img src="https://img.shields.io/github/stars/andrianllmm/datasci-wrapped?style=for-the-badge&color=a766fe" alt="GitHub stars" />
-  </a>
-  <a href="https://github.com/andrianllmm/datasci-wrapped/blob/main/LICENSE">
-    <img src="https://img.shields.io/github/license/andrianllmm/datasci-wrapped?style=for-the-badge&color=a766fe" alt="License" />
-  </a>
-  <a href="https://datasci-wrapped.vercel.app">
-    <img src="https://img.shields.io/badge/Live-Demo?style=for-the-badge&color=a766fe" alt="Live demo" />
-  </a>
-</p>
-
 <div align="center">
-  <a href="https://github.com/andrianllmm/datasci-wrapped">
-    <img src="docs/images/updssoc-logo.png" alt="Logo" width="80" height="80">
-  </a>
+
+[![Stargazers](https://img.shields.io/github/stars/andrianllmm/datasci-wrapped?style=for-the-badge&color=a766fe)](https://github.com/andrianllmm/datasci-wrapped/stargazers)
+[![License](https://img.shields.io/github/license/andrianllmm/datasci-wrapped?style=for-the-badge&color=a766fe)](https://github.com/andrianllmm/datasci-wrapped/blob/main/LICENSE)
+[![Live Demo](https://img.shields.io/badge/Live-Demo?style=for-the-badge&color=a766fe)](https://datasci-wrapped.vercel.app)
+
+<a href="https://github.com/andrianllmm/datasci-wrapped">
+  <img src="docs/images/updssoc-logo.png" alt="Logo" width="80" height="80">
+</a>
 
 <h3 align="center">DataSci Wrapped</h3>
 
